@@ -1,0 +1,241 @@
+<html>
+  <head>
+    <link
+      crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      rel="stylesheet"
+    />
+    <style>
+      /*ĐOẠN 1*/
+      body {
+        background-color: #f8f9fa;
+        font-family: "Roboto Flex", sans-serif;
+      }
+      .navbar {
+        padding: 1rem 2rem;
+      }
+      .navbar-brand {
+        font-weight: bold;
+        color: #ff3b3f;
+      }
+      .navbar-nav .nav-link {
+        color: #9e9e9e;
+        margin-right: 1rem;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .navbar-nav .nav-link:hover {
+        color: #ff3b3f;
+      }
+      /*ĐOẠN 2*/
+      .explore-title {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+      }
+      .explore-subtitle {
+        text-align: center;
+        color: #777;
+        margin-bottom: 40px;
+      }
+      .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+      }
+      .card img {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+      }
+      .card-body {
+        padding: 20px;
+      }
+      .rating {
+        font-size: 14px;
+        color: #777;
+      }
+      .rating .badge {
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+      .rating .badge-primary {
+        background-color: #007bff;
+      }
+      .rating .badge-success {
+        background-color: #28a745;
+      }
+      .rating .badge-warning {
+        background-color: #ffc107;
+      }
+      .price {
+        text-decoration: line-through;
+        color: #dc3545;
+      }
+      .price-new {
+        color: #28a745;
+      }
+      .profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      .profile-info {
+        display: flex;
+        align-items: center;
+      }
+      .profile-info p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ĐOẠN 1 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"> TravelBooking </a>
+        <button
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          class="navbar-toggler"
+          data-bs-target="#navbarNav"
+          data-bs-toggle="collapse"
+          type="button"
+        >
+          <span class="navbar-toggler-icon"> </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"> HOME </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> EXPLORE </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> REVIEW </a>
+            </li>
+            <div class="vertical-line1"></div>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                style="color: #ff3b3f"
+                onmouseover="this.style.color='433e3e'"
+                onmouseout="this.style.color='#ff3b3f'"
+              >
+                SIGN IN
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="#"
+                style="color: #ff3b3f"
+                onmouseover="this.style.color='433e3e'"
+                onmouseout="this.style.color='#ff3b3f'"
+              >
+                REGISTER
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- ĐOẠN 2 -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://placehold.co/600x400"
+              class="card-img-top"
+              alt="Image of Tommy Helfinger Bar"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Tommy Helfinger Bar</h5>
+              <div class="rating">
+                <span class="badge badge-primary">5.0</span> 10 Ratings
+                <span class="price">Form 5$</span>
+                <span class="price-new">300$</span> Resturent
+              </div>
+              <div class="profile-info mt-3">
+                <img
+                  src="https://placehold.co/40x40"
+                  class="profile-img"
+                  alt="Profile image"
+                />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incid ut labore et dolore magna aliqua....
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://placehold.co/600x400"
+              class="card-img-top"
+              alt="Image of Swim And Dine Resort"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Swim And Dine Resort</h5>
+              <div class="rating">
+                <span class="badge badge-success">4.5</span> 8 Ratings
+                <span class="price">Form 50$</span>
+                <span class="price-new">500$</span> Hotel
+              </div>
+              <div class="profile-info mt-3">
+                <img
+                  src="https://placehold.co/40x40"
+                  class="profile-img"
+                  alt="Profile image"
+                />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incid ut labore et dolore magna aliqua....
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="https://placehold.co/600x400"
+              class="card-img-top"
+              alt="Image of Europe Tour"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Europe Tour</h5>
+              <div class="rating">
+                <span class="badge badge-warning">5.0</span> 15 Ratings
+                <span class="price">Form 5k$</span>
+                <span class="price-new">10k$</span> Destination
+              </div>
+              <div class="profile-info mt-3">
+                <img
+                  src="https://placehold.co/40x40"
+                  class="profile-img"
+                  alt="Profile image"
+                />
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
+                  do eiusmod tempor incid ut labore et dolore magna aliqua....
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
