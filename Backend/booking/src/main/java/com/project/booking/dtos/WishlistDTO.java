@@ -9,7 +9,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Wishlist {
+public class WishlistDTO {
     @JsonProperty("owner_id")
     private Long ownerId;
 

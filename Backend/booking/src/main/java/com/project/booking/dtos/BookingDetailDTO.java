@@ -12,7 +12,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingDetail {
+public class BookingDetailDTO {
 
     @NotNull
     @JsonProperty("room_id")
@@ -32,6 +32,11 @@ public class BookingDetail {
 
     private String phone;
 
-    private Long price;
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("special_request")
+    private String specialRequest;
+
 
 }

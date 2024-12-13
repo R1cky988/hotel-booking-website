@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.*;
-
+import java.util.regex.Pattern;
 import java.io.IOException;
 import java.net.http.HttpRequest;
 import java.util.Arrays;
@@ -45,13 +45,19 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     private boolean isBypassToken(@NotNull HttpServletRequest request){
         final List<Pair<String, String>> bypassTokens = Arrays.asList(
-                Pair.of("/users/register", "POST"),
-                Pair.of("/users/login", "POST")
+                Pair.of("^/users/register$", "POST"),
+                Pair.of("^/users/login$", "POST"),
+                Pair.of("^/booking$", "POST"),
+                Pair.of("^/room/upload$", "POST"),
+                Pair.of("^/room/place/\\d+$", "GET"),
+                Pair.of("^/feedback$", "POST"),
+                Pair.of("^/place/upload$", "POST"),
+                Pair.of("^/place", "GET")
 
         );
         for(Pair<String, String> bypassToken : bypassTokens){
-            if(request.getServletPath().contains(bypassToken.getFirst()) &&
-                    request.getMethod().equals(bypassToken.getSecond())){
+            if (Pattern.compile(bypassToken.getFirst()).matcher(request.getServletPath()).matches() &&
+                    request.getMethod().equalsIgnoreCase(bypassToken.getSecond())) {
                 return true;
             }
         }

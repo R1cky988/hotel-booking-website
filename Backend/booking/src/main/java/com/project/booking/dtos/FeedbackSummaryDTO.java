@@ -10,7 +10,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeedbackSummary {
+public class FeedbackSummaryDTO {
     @NotNull
     @JsonProperty("room_id")
     private Long roomId;

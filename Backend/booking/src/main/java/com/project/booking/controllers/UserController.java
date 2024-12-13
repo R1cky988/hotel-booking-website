@@ -3,6 +3,7 @@ package com.project.booking.controllers;
 import com.project.booking.dtos.UserLoginDTO;
 import com.project.booking.dtos.UsersDTO;
 import com.project.booking.models.Users;
+import com.project.booking.repositories.UsersRepository;
 import com.project.booking.services.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UserController {
     private final UserService userService;
+    private final UsersRepository usersRepository;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(
@@ -85,7 +87,10 @@ public class UserController {
         }
 
     }
-    
 
+    @GetMapping("")
+    public ResponseEntity<?> getAllUsers() {
+        return ResponseEntity.ok(usersRepository.findAll());
+    }
 }
 

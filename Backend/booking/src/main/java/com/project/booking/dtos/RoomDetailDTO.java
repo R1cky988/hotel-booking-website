@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoomDetail {
+public class RoomDetailDTO {
     private String title;
 
     private String address;
@@ -23,9 +23,11 @@ public class RoomDetail {
     @JsonProperty("extra_info")
     private String extraInfo;
 
-    private Date checkin;
+    @JsonProperty("check_in")
+    private Date checkIn;
 
-    private Date checkout;
+    @JsonProperty("check_out")
+    private Date checkOut;
 
     @JsonProperty("max_guests")
     private int maxGuests;

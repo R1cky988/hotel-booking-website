@@ -12,16 +12,18 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class FeedbackDetail {
+public class FeedbackDetailDTO {
     @NotNull
     @JsonProperty("feedback_summary_id")
     private Long feedbackSummaryId;
 
     @NotNull
+    @JsonProperty("name")
+    private String name;
+
+    @NotNull
     @JsonProperty("user_id")
     private Long userId;
-
-    private Date date;
 
     private String comment;
 

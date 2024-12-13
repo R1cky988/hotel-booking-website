@@ -11,7 +11,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Places {
+public class PlacesDTO {
     private String name;
 
     @NotNull
