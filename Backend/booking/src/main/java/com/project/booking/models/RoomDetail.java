@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -18,37 +19,25 @@ public class RoomDetail {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
-    private String title;
+    private Boolean available;
 
-    @Column(name = "address")
-    private String address;
+    private String url;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "room_type")
+    private String roomType;
 
-    @Column(name = "perks")
-    private String perks;
+    private int persons;
 
-    @Column(name = "extra_info")
-    private String extraInfo;
-
-    @Column(name = "check_in")
-    private Date checkIn;
-
-    @Column(name = "check_out")
-    private Date checkOut;
-
-    @Column(name = "max_guests")
-    private int maxGuests;
-
-    @Column(name = "price")
-    private int price;
-
-    @Column(name = "photo")
-    private String photo;
+    @Column(name = "room_left")
+    private int roomLeft;
 
     @ManyToOne
-    @JoinColumn(name = "place_id")
-    private Place place;
+    @JoinColumn(name = "property_id")
+    private Properties properties;
+
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
+
+    
 }

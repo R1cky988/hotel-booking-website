@@ -1,6 +1,6 @@
 package com.project.booking.services;
 
-import com.project.booking.components.JwtTokenUtil;
+//import com.project.booking.components.JwtTokenUtil;
 import com.project.booking.dtos.UsersDTO;
 import com.project.booking.exceptions.DataNotFoundException;
 import com.project.booking.exceptions.SamePasswordException;
@@ -9,8 +9,6 @@ import com.project.booking.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +20,7 @@ public class UserService implements IUserService{
     private final UsersRepository usersRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final JwtTokenUtil jwtTokenUtil;
+    //private final JwtTokenUtil jwtTokenUtil;
 
     @Override
     public Users createUser(UsersDTO userDTO) throws DataNotFoundException {
@@ -77,22 +75,16 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public String login(String email, String password) throws Exception{
-        Optional<Users> optionalUsers = usersRepository.findByEmail(email);
-        if(optionalUsers.isEmpty()){
-            throw new DataNotFoundException("Invalid email or password");
-        }
-        Users existingUser = optionalUsers.get();
-        //check password
-        if(!passwordEncoder.matches(password, existingUser.getPassword())){
-            throw new BadCredentialsException("Wrong email or password");
-        }
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                email, password
-        );//tao authentication token sau khi da kiem tra email va password
+    public Users login(String email, String password) throws Exception { // tra ve token
+        Optional<Users> optionalUser = usersRepository.findByEmail(email);
 
-        //Xac thuc voi spring security
-        authenticationManager.authenticate(authenticationToken);
-        return jwtTokenUtil.generateToken(existingUser);
+        if(optionalUser.isEmpty()) {
+            throw new DataNotFoundException("Invalid email/password");
+        }
+        Users existingUser = optionalUser.get();
+        if (existingUser.getPassword().equals(password)){
+            return existingUser;
+        }
+        else throw new RuntimeException("password is not correct");
     }
 }

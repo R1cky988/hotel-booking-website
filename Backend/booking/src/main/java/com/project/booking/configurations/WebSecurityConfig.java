@@ -1,7 +1,7 @@
 package com.project.booking.configurations;
 
-import com.project.booking.components.JwtTokenUtil;
-import com.project.booking.filters.JwtTokenFilter;
+//import com.project.booking.components.JwtTokenUtil;
+//import com.project.booking.filters.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,12 +20,12 @@ import java.util.List;
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
-    private final JwtTokenFilter jwtTokenFiler;
+   // private final JwtTokenFilter jwtTokenFiler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .addFilterBefore(jwtTokenFiler, UsernamePasswordAuthenticationFilter.class)
+         //       .addFilterBefore(jwtTokenFiler, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(request->{
                     request.requestMatchers("**").permitAll();
                 });

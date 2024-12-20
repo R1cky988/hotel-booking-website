@@ -6,7 +6,7 @@ import com.project.booking.models.Users;
 
 public interface IUserService {
     Users createUser(UsersDTO userDTO) throws DataNotFoundException;
-    String login(String phoneNumber, String password) throws Exception;
+    Users login(String email, String password) throws Exception;
     //Users updateUser(long userId, UsersDTO userDTO) throws DataNotFoundException;
     Users getUserById(long userId);
     Users updateUserPassword(long userId, UsersDTO userDTO);

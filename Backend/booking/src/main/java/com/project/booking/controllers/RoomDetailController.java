@@ -20,22 +20,22 @@ public class RoomDetailController {
     private final RoomDetailService roomDetailService;
     private final RoomDetailRepository roomDetailRepository;
 
-    @PostMapping("/upload")
-    public ResponseEntity<?> uploadRoom(
-            @RequestBody RoomDetailDTO roomDetailDTO,
-            BindingResult result
-    ){
-        try{
-            if(result.hasErrors()){
-                List<String> errorMessages = result.getFieldErrors().stream().map(FieldError:: getDefaultMessage).toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
-            RoomDetail newRoom = roomDetailService.createRoom(roomDetailDTO);
-            return ResponseEntity.ok(newRoom);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
+//    @PostMapping("/upload")
+//    public ResponseEntity<?> uploadRoom(
+//            @RequestBody RoomDetailDTO roomDetailDTO,
+//            BindingResult result
+//    ){
+//        try{
+//            if(result.hasErrors()){
+//                List<String> errorMessages = result.getFieldErrors().stream().map(FieldError:: getDefaultMessage).toList();
+//                return ResponseEntity.badRequest().body(errorMessages);
+//            }
+//            RoomDetail newRoom = roomDetailService.createRoom(roomDetailDTO);
+//            return ResponseEntity.ok(newRoom);
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//    }
 
     @GetMapping("/place/{placeId}")
     public ResponseEntity<?> getAllRooms(

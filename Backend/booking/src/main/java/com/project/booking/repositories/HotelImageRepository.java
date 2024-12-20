@@ -1,16 +1,15 @@
 package com.project.booking.repositories;
 
-import com.project.booking.models.RoomDetail;
+import com.project.booking.models.HotelImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface RoomDetailRepository extends JpaRepository<RoomDetail, Long> {
-    @Query("SELECT rd FROM RoomDetail rd WHERE rd.hotel.id = :hotelId")
-    List<RoomDetail> findAllRoomInPlace(@Param("hotelId") Long hotelId);
+public interface HotelImageRepository extends JpaRepository<HotelImage, Long> {
+    @Query("SELECT hi.imageUrl FROM HotelImage hi WHERE hi.hotel.id = :hotelId")
+    List<String> getHotelImage(@Param("hotelId") Long hotelId);
 }
