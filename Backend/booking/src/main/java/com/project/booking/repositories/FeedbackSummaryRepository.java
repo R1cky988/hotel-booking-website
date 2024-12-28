@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface FeedbackSummaryRepository extends JpaRepository<FeedbackSummary, Long> {
     @Query("SELECT fs FROM FeedbackSummary fs WHERE fs.room.id = :roomId")
-    List<FeedbackSummary> findByRoomId(@Param("roomId") Long roomId);
+    FeedbackSummary findByRoomId(@Param("roomId") Long roomId);
 }

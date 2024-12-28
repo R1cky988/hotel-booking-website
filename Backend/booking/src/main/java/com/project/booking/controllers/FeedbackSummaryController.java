@@ -3,6 +3,7 @@ package com.project.booking.controllers;
 import com.project.booking.dtos.FeedbackSummaryDTO;
 import com.project.booking.models.FeedbackDetail;
 import com.project.booking.models.FeedbackSummary;
+import com.project.booking.response.FeedbackSummaryResponse;
 import com.project.booking.services.FeedbackSummaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class FeedbackSummaryController {
     @GetMapping("/room/{roomId}")
     public ResponseEntity<?> getAllFeedbackOfRoom(@PathVariable("roomId") Long roomId){
         try{
-            List<FeedbackSummary> feedbackSummaryList = feedbackSummaryService.getFeedbackOfRoom(roomId);
+            FeedbackSummaryResponse feedbackSummaryList = feedbackSummaryService.getFeedbackOfRoom(roomId);
             return ResponseEntity.ok(feedbackSummaryList);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

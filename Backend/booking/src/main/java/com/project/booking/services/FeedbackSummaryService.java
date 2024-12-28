@@ -7,6 +7,7 @@ import com.project.booking.models.FeedbackSummary;
 import com.project.booking.models.RoomDetail;
 import com.project.booking.repositories.FeedbackSummaryRepository;
 import com.project.booking.repositories.RoomDetailRepository;
+import com.project.booking.response.FeedbackSummaryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -27,9 +28,10 @@ public class FeedbackSummaryService {
         return feedbackSummaryRepository.save(feedbackSummary);
     }
 
-    public List<FeedbackSummary> getFeedbackOfRoom(Long roomId){
+    public FeedbackSummaryResponse getFeedbackOfRoom(Long roomId){
         RoomDetail roomDetail = roomDetailRepository.findById(roomId)
                 .orElseThrow(()->new DataNotFoundException("Cannot find room"));
-        return feedbackSummaryRepository.findByRoomId(roomId);
+        FeedbackSummary summary = feedbackSummaryRepository.findByRoomId(roomId);
+        return FeedbackSummaryResponse.fromSummary(summary);
     }
 }
