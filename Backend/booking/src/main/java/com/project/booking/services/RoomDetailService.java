@@ -1,11 +1,14 @@
 package com.project.booking.services;
 
-import com.project.booking.dtos.RoomDetailDTO;
+import com.project.booking.dtos.*;
 import com.project.booking.exceptions.DataNotFoundException;
-import com.project.booking.models.Hotel;
-import com.project.booking.models.RoomDetail;
+import com.project.booking.models.*;
 import com.project.booking.repositories.HotelRepository;
 import com.project.booking.repositories.RoomDetailRepository;
+import com.project.booking.repositories.RoomFacilityDetailRepository;
+import com.project.booking.repositories.RoomFacilityRepository;
+import com.project.booking.response.ListRoomDetailResponse;
+import com.project.booking.response.RoomDetailResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,32 +19,58 @@ import java.util.List;
 public class RoomDetailService {
     private final HotelRepository hotelRepository;
     private final RoomDetailRepository roomDetailRepository;
+    private final RoomFacilityRepository roomFacilityRepository;
+    private final RoomFacilityDetailRepository roomFacilityDetailRepository;
 
-//    public RoomDetail createRoom(RoomDetailDTO roomDetailDTO){
-//        Hotel existingHotel = hotelRepository.findById(roomDetailDTO.getPlaceId())
-//                .orElseThrow(() -> new DataNotFoundException(
-//                        "Cannot find room with id: " + roomDetailDTO.getPlaceId()));
-//        RoomDetail newRoom = RoomDetail.builder()
-//                .address(roomDetailDTO.getAddress())
-//                .perks(roomDetailDTO.getPerks())
-//                .photo(roomDetailDTO.getPhoto())
-//                .title(roomDetailDTO.getTitle())
-//                .price(roomDetailDTO.getPrice())
-//                .maxGuests(roomDetailDTO.getMaxGuests())
-//                .checkIn(roomDetailDTO.getCheckIn())
-//                .checkOut(roomDetailDTO.getCheckOut())
-//                .description(roomDetailDTO.getDescription())
-//                .address(roomDetailDTO.getAddress())
-//                .place(existingHotel)
-//                .extraInfo(roomDetailDTO.getExtraInfo())
-//                .build();
-//        return roomDetailRepository.save(newRoom);
-//    }
+    public RoomDetail createRoom(RoomDetailDTO roomDetailDTO){
+        Hotel existingHotel = hotelRepository.findById(roomDetailDTO.getHotelId())
+                .orElseThrow(() -> new DataNotFoundException(
+                        "Cannot find room with id: " + roomDetailDTO.getHotelId()));
+        RoomDetail newRoom = RoomDetail.builder()
+                .available(true)
+                .url(roomDetailDTO.getUrl())
+                .roomType(roomDetailDTO.getRoomType())
+                .persons(roomDetailDTO.getPersons())
+                .checkIn(roomDetailDTO.getCheckIn())
+                .checkOut(roomDetailDTO.getCheckOut())
+                .pricePerNight(roomDetailDTO.getPricePerNight())
+                .hotel(existingHotel)
+                .build();
+         roomDetailRepository.save(newRoom);
 
-    public List<RoomDetail> getAllRoomOfPlace(Long placeId){
-        Hotel existingHotel = hotelRepository.findById(placeId)
-                .orElseThrow(()->new DataNotFoundException("Cannot find place"));
+        for (RoomFacilityDTO facilityDTO : roomDetailDTO.getFacilityDTO()) {
+            RoomFacilities roomFacilities = RoomFacilities.builder()
+                    .name(facilityDTO.getName())
+                    .overview(facilityDTO.getOverview())
+                    .room(newRoom)
+                    .build();
+            roomFacilityRepository.save(roomFacilities);
 
-        return roomDetailRepository.findAllRoomInPlace(placeId);
+            for (RoomFacilityDetailDTO facilityDetailDTO : facilityDTO.getRoomFacilityDetailDTOS()) {
+                RoomFacilityDetail roomFacilityDetail = RoomFacilityDetail.builder()
+                        .roomFacility(roomFacilities)
+                        .name(facilityDetailDTO.getName())
+                        .additionalInfo(facilityDetailDTO.getAdditionalInfo())
+                        .build();
+                roomFacilityDetailRepository.save(roomFacilityDetail);
+            }
+        }
+        return newRoom;
+    }
+
+    public ListRoomDetailResponse getAllRoomOfPlace(Long hotelId){
+        List<RoomDetailResponse> roomDetailResponses = roomDetailRepository.findAllRoomInPlace(hotelId).stream()
+                .map(RoomDetailResponse::fromRoomDetail).toList();
+                //.orElseThrow(()->new DataNotFoundException("Cannot find place"));
+        return ListRoomDetailResponse.builder()
+                .roomDetailResponseList(roomDetailResponses)
+                .build();
+
+    }
+
+    public RoomDetail getRoomById(Long roomId){
+        RoomDetail roomDetail =  roomDetailRepository.findById(roomId)
+                .orElseThrow(()-> new DataNotFoundException("Cannot find the hotel you need"));
+        return roomDetail;
     }
 }

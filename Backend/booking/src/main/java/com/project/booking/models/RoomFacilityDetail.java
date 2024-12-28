@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Table(name = "room_facility_detail")
 public class RoomFacilityDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

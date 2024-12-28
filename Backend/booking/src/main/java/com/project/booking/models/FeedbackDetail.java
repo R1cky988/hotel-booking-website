@@ -1,5 +1,6 @@
 package com.project.booking.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.booking.dtos.FeedbackSummaryDTO;
 import jakarta.persistence.*;
 import lombok.*;
@@ -22,6 +23,7 @@ public class FeedbackDetail {
 
     @ManyToOne
     @JoinColumn(name = "feedback_summary_id")
+    @JsonBackReference
     private FeedbackSummary feedbackSummary;
 
     @Column(name = "name")

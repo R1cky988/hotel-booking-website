@@ -1,9 +1,14 @@
 package com.project.booking.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.booking.models.Hotel;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Builder
 @Data
@@ -12,16 +17,14 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomDetailDTO {
-    private String title;
+    private Boolean available;
 
-    private String address;
+    private String url;
 
-    private String description;
+    @JsonProperty("room_type")
+    private String roomType;
 
-    private String perks;
-
-    @JsonProperty("extra_info")
-    private String extraInfo;
+    private int persons;
 
     @JsonProperty("check_in")
     private Date checkIn;
@@ -29,15 +32,12 @@ public class RoomDetailDTO {
     @JsonProperty("check_out")
     private Date checkOut;
 
-    @JsonProperty("max_guests")
-    private int maxGuests;
+    @JsonProperty("price_per_night")
+    private Long pricePerNight;
 
-    private int price;
-
-    private String photo;
-
-    @JsonProperty("place_id")
-    private Long placeId;
-
+    @JsonProperty("hotel_id")
+    private Long hotelId;
+    @JsonProperty("facilities")
+    private List<RoomFacilityDTO> facilityDTO;
 
 }

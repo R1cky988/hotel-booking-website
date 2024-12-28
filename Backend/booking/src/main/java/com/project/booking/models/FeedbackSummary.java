@@ -1,7 +1,10 @@
 package com.project.booking.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +25,8 @@ public class FeedbackSummary extends Time{
 
     @Column(name = "rating")
     private double rate;
+
+    @OneToMany(mappedBy = "feedbackSummary", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<FeedbackDetail> feedbackDetails;
 }

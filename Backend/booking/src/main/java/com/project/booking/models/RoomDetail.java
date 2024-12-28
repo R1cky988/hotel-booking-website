@@ -1,8 +1,11 @@
 package com.project.booking.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,16 +31,20 @@ public class RoomDetail {
 
     private int persons;
 
-    @Column(name = "room_left")
-    private int roomLeft;
+    @Column(name = "check_in")
+    private Date checkIn;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id")
-    private Properties properties;
+    @Column(name = "check_out")
+    private Date checkOut;
+
+    @Column(name = "price_per_night")
+    private Long pricePerNight;
 
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    
+    @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<RoomFacilities> facilities;
 }

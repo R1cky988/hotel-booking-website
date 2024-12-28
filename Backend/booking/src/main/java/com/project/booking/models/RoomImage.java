@@ -24,13 +24,9 @@ public class RoomImage {
         @Column(name = "large_url")
         private String largeUrl;
 
-        private String orientation;
 
         @Column(name = "created_at")
         private LocalDateTime createTime;
-
-        @Embedded
-        private Grid grid;
 
         @ManyToOne
         @JoinColumn(name = "room_id")
