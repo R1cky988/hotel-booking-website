@@ -3,10 +3,9 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>TravelBooking | Home</title>
-    <link rel="stylesheet" href="..Css/app.css" />
     <link
       crossorigin="anonymous"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       rel="stylesheet"
     />
@@ -21,7 +20,7 @@
     />
     <link
       crossorigin="anonymous"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link
@@ -29,399 +28,14 @@
       rel="stylesheet"
       type="text/css"
     />
-    <style>
-      /*mũi tên sang trái phải*/
-      .carousel-control-prev,
-      .carousel-control-next {
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        background-color: rgb(212, 212, 212);
-        border-radius: 50%;
-        border: 1px solid rgb(255, 255, 255); /* Đổi viền thành màu đen */
-        color: black; /* Đổi màu biểu tượng thành màu đen */
-      }
-      .carousel-control-prev {
-        left: -15px; /* Dịch sang trái, tăng giá trị âm nếu muốn ra xa hơn */
-      }
-
-      .carousel-control-next {
-        right: -15px; /* Dịch sang phải, tăng giá trị dương nếu muốn ra xa hơn */
-      }
-      .carousel-control-prev:hover,
-      .carousel-control-next:hover {
-        background-color: rgb(186, 186, 186);
-        color: white; /* Mũi tên đổi thành màu trắng khi hover */
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Roboto Flex", sans-serif;
-      }
-      .navbar {
-        padding: 0.8rem;
-      }
-      .navbar-brand {
-        font-size: 25px;
-        font-weight: bold;
-        color: #ffffff;
-      }
-      .navbar-nav .nav-link {
-        color: rgb(255, 255, 255);
-        margin-right: 1rem;
-        font-size: 14px;
-        font-weight: 600;
-      }
-      .navbar-nav .nav-link:hover {
-        color: #232323;
-      }
-      .navbar {
-        background-color: rgb(28, 87, 136); /*Màu xám nhạt*/
-        /* opacity: 0.9; */
-      }
-      /*ĐOẠN 1.1*/
-      .hero-section {
-        position: relative;
-        background: url("../Picture/banner.jpg") no-repeat center center/cover;
-        height: 600px;
-        color: white;
-        text-align: center;
-
-        display: grid;
-        justify-items: center;
-        align-content: start;
-      }
-      /* tạo lớp phủ */
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(55, 67, 79, 0.7);
-        z-index: 1; /* Đặt lớp phủ ở trên hình nền */
-        opacity: 0.95;
-      }
-
-      .hero-section * {
-        position: relative;
-        z-index: 2; /* nội dung hiển thị trên lớp phủ */
-      }
-      .hero-section h1 {
-        margin-top: 100px;
-        font-size: 45px;
-        font-weight: 700;
-        letter-spacing: 1.7px;
-        line-height: 1.4;
-      }
-      .hero-section p {
-        font-size: 1.2rem;
-        margin-top: 30px;
-      }
-      .search-bar {
-        margin-top: 70px;
-        display: flex;
-        padding: 10px;
-        width: 90%;
-        background-color: #fff;
-        border-radius: 5px; /* Bo góc */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Tạo đổ bóng */
-      }
-      .search-bar .input-group {
-        flex: 1;
-        margin-right: 10px;
-      }
-      .search-bar .input-group-text {
-        background-color: transparent;
-        border: none;
-      }
-      .search-bar .form-control {
-        border: none;
-        box-shadow: none;
-      }
-      .search-bar .btn-search {
-        background-color: #ff5a5f;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-      }
-      .search-bar .btn-search i {
-        margin-left: 5px;
-      }
-      .vertical-line {
-        border-left: 1px solid #ccc;
-        height: 50px;
-        margin: 0 10px;
-        opacity: 0.5;
-      }
-      .vertical-line1 {
-        border-left: 1px solid #ccc;
-        height: 30px;
-        margin: 0 10px;
-        opacity: 0.5;
-      }
-      .categories {
-        display: flex;
-        justify-content: space-around;
-        margin-top: -50px;
-      }
-      .category-card {
-        background: white;
-        padding: 1rem;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        width: 150px;
-      }
-      .category-card img {
-        width: 50px;
-        height: 50px;
-        margin-bottom: 1rem;
-      }
-      .category-card h5 {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-      }
-      .category-card p {
-        font-size: 0.9rem;
-        color: #777;
-      }
-
-      /*ĐOẠN 2*/
-      .section-title {
-        text-align: center;
-        margin-bottom: 40px;
-      }
-      .card2 {
-        /* border: 10px; */
-        margin-left: 10px;
-        margin-right: 10px;
-        /* border-radius: 20px; */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        height: 370px;
-      }
-      .card img {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      .card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      }
-      .rating {
-        background-color: #003580;
-        color: white;
-        font-size: 0.8rem;
-        padding: 0.2rem 0.4rem;
-        border-radius: 0.2rem;
-        display: inline-block;
-        margin-right: 0.5rem;
-      }
-      .new-price {
-        font-size: 14px;
-        font-weight: bold;
-        color: black;
-      }
-
-      .card-title {
-        font-size: 15px;
-        text-align: center;
-      }
-      .card-text {
-        font-size: 12px;
-        text-align: center;
-      }
-      .d-flex {
-        font-size: 12px;
-        display: flex;
-        justify-content: center;
-      }
-      .popular-title {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-      }
-
-      /*ĐOẠN 3*/
-      .explore-title {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-      }
-      .explore-subtitle {
-        text-align: center;
-        color: #777;
-        margin-bottom: 40px;
-      }
-      .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-      }
-      .card img {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      .card-body {
-        padding: 20px;
-      }
-      /* .rating {
-        font-size: 14px;
-        color: #777;
-      } */
-      .rating .badge {
-        font-size: 14px;
-        padding: 5px 10px;
-        border-radius: 5px;
-      }
-      .rating .badge-primary {
-        background-color: #007bff;
-      }
-      .rating .badge-success {
-        background-color: #28a745;
-      }
-      .rating .badge-warning {
-        background-color: #ffc107;
-      }
-      .price {
-        text-decoration: line-through;
-        color: #dc3545;
-      }
-      .price-new {
-        color: #28a745;
-      }
-      .profile-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: 10px;
-      }
-      .profile-info {
-        display: flex;
-        align-items: center;
-      }
-      .profile-info p {
-        margin: 0;
-      }
-      /*ĐOẠN 4*/
-      .card {
-        border: none;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-bottom: 30px;
-      }
-      .card img {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-      }
-      /* .card-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-      } */
-      .badge {
-        font-size: 0.875rem;
-        padding: 0.5em 0.75em;
-        border-radius: 5px;
-      }
-      .text-muted {
-        font-size: 0.875rem;
-      }
-      .card-footer {
-        background-color: transparent;
-        border-top: none;
-      }
-      .card-footer .btn {
-        font-size: 0.875rem;
-        padding: 0;
-      }
-      .card-footer .fa {
-        margin-right: 5px;
-      }
-      /*ĐOẠN 5*/
-      .review-card {
-        background: #fff;
-        border: 1px solid #e6e6e6;
-        border-radius: 10px;
-        padding: 20px;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin: 10px;
-      }
-      .review-card img {
-        border-radius: 50%;
-        width: 80px;
-        height: 80px;
-        object-fit: cover;
-      }
-      .review-card h5 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 15px;
-      }
-      .review-card p {
-        font-size: 14px;
-        color: #777;
-      }
-      .review-card .stars {
-        color: #ffc107;
-        margin: 10px 0;
-      }
-      .review-card.active {
-        border: 2px solid #007bff;
-      }
-      .section-title {
-        text-align: center;
-        margin-bottom: 40px;
-      }
-      .section-title h2 {
-        margin-top: 20px;
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-      }
-      .section-title p {
-        font-size: 16px;
-        color: #777;
-      }
-      .footer {
-        background-color: #f1f3f5;
-        padding: 20px 0;
-        text-align: center;
-        font-size: 14px;
-        color: #6c757d;
-      }
-      .footer .left,
-      .footer .right {
-        display: inline-block;
-        width: 45%;
-        vertical-align: top;
-      }
-      .footer .left {
-        text-align: left;
-      }
-      .footer .right {
-        text-align: right;
-      }
-      .footer .left h5,
-      .footer .right h5 {
-        color: rgb(28, 87, 136);
-        font-weight: bold;
-      }
-    </style>
+    <link rel="stylesheet" href="../Css/ListPhongHome.css" />
+    <link rel="stylesheet" href="../Css/index.css" />
   </head>
   <body>
-    <!-- ĐOẠN 1 -->
+    <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
       <div class="container-fluid" style="max-height: 30px">
-        <a class="navbar-brand" href="#"> TravelBooking </a>
+        <a class="navbar-brand" href="index.html"> TravelBooking </a>
         <button
           aria-controls="navbarNav"
           aria-expanded="false"
@@ -444,10 +58,13 @@
               <a class="nav-link" href="#"> HOME </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"> EXPLORE </a>
+              <a class="nav-link" href="#popular"> POPULAR </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"> REVIEW </a>
+              <a class="nav-link" href="#explore"> EXPLORE </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#review"> REVIEW </a>
             </li>
             <div class="vertical-line1"></div>
             <li class="nav-item">
@@ -469,19 +86,18 @@
                 onmouseover="this.style.color='433e3e'"
                 onmouseout="this.style.color='#ff3b3f'"
               >
-                REGISTER
+                SIGN UP
               </a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-
+    <!-- Tìm kiếm -->
     <section class="hero-section">
       <h1>BEST PLACE TO FIND AND EXPLORE<br />THAT ALL YOU NEED</h1>
       <p>
-        Find Best Place, Restaurant, Hotel, Real State and many more think in
-        just One click
+        Find Best Place, Hotel, Real State and many more think in just One click
       </p>
       <div class="search-bar">
         <div class="input-group">
@@ -489,7 +105,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Ví dụ: Hotel, Homestay, Villa"
+            placeholder="Ex: Hotel, Homestay, Apartment"
           />
           <span class="input-group-text"><i class="fas fa-list"></i></span>
         </div>
@@ -499,7 +115,7 @@
           <input
             type="text"
             class="form-control"
-            placeholder="Ví dụ: Sapa, Đà Nẵng, Hội An"
+            placeholder="Ex: Sapa, Đà Nẵng, Hội An"
           />
           <span class="input-group-text"
             ><i class="fas fa-crosshairs"></i
@@ -511,8 +127,8 @@
       </div>
     </section>
 
-    <!--ĐOẠN 2-->
-    <div class="container my-5">
+    <!--địa điểm phổ biến-->
+    <div class="container my-5" id="popular">
       <div class="section-title">
         <h2 class="Popular-title">POPULAR LOCATION</h2>
         <p>Refer to the location chosen by many people</p>
@@ -522,7 +138,7 @@
           <img
             alt="Indoor swimming pool in Cherry Hotel and Apartment"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/PQ4PFFd2enzpAC0OVSwugPAq1m9rM6Dltri8KhDlev5Msi1TA.jpg"
             width="600"
           />
@@ -541,7 +157,7 @@
           <img
             alt="Living room in LUCK APART 8 - Hanoi Westlake Balcony Studio"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/eswxztp71vzNTKWMfKJC2fOteHOmmEWoNsnTP2w7J8MfhVseE.jpg"
             width="600"
           />
@@ -560,7 +176,7 @@
           <img
             alt="Living room in LUCK APART 8 - Hanoi Westlake Balcony Studio"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/eswxztp71vzNTKWMfKJC2fOteHOmmEWoNsnTP2w7J8MfhVseE.jpg"
             width="600"
           />
@@ -579,7 +195,7 @@
           <img
             alt="Indoor swimming pool in Cherry Hotel and Apartment"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/PQ4PFFd2enzpAC0OVSwugPAq1m9rM6Dltri8KhDlev5Msi1TA.jpg"
             width="600"
           />
@@ -598,7 +214,7 @@
           <img
             alt="Living room in THEA Private Suites by TH District"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/BRPSFer3Zr1aDyIUqepvTwaS0yeQkRxIiEMIoO95OP5WYFrnA.jpg"
             width="600"
           />
@@ -617,7 +233,7 @@
           <img
             alt="Bedroom in Simmi 5 Hotel &amp; Apartment"
             class="card-img-top"
-            height="200"
+            height="180"
             src="https://storage.googleapis.com/a1aa/image/W5jfLxWagcx8KaOQiOMVoUiv02zwRhebEGCu4fUxPfl5wKWPB.jpg"
             width="600"
           />
@@ -634,394 +250,252 @@
         </div>
       </div>
     </div>
-    <!-- ĐOẠN 3 -->
-    <div class="container">
+    <!-- Hiển thị khách sạn-->
+    <div class="container" id="explore">
       <h2 class="explore-title">EXPLORE</h2>
       <p class="explore-subtitle">
         Explore New place, food, culture around the world and many more
       </p>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              src="https://placehold.co/600x400"
-              class="card-img-top"
-              alt="Image of Tommy Helfinger Bar"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Tommy Helfinger Bar</h5>
-              <div class="rating">
-                <span class="badge badge-primary">5.0</span> 10 Ratings
-                <span class="price">Form 5$</span>
-                <span class="price-new">300$</span> Resturent
-              </div>
-              <div class="profile-info mt-3">
-                <img
-                  src="https://placehold.co/40x40"
-                  class="profile-img"
-                  alt="Profile image"
-                />
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incid ut labore et dolore magna aliqua....
-                </p>
+      <div class="blog">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="blog_box">
+                <div class="blog_img">
+                  <figure><img src="../images/blog1.jpg" alt="#" /></figure>
+                </div>
+                <div class="blog_room">
+                  <h3>Bed Room</h3>
+                  <span>The standard chunk </span>
+                  <p>
+                    If you are going to use a passage of Lorem Ipsum, you need
+                    to be sure there isn't anything embarrassing hidden in the
+                    middle of text. All the Lorem Ipsum generatorsIf you are
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              src="https://placehold.co/600x400"
-              class="card-img-top"
-              alt="Image of Swim And Dine Resort"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Swim And Dine Resort</h5>
-              <div class="rating">
-                <span class="badge badge-success">4.5</span> 8 Ratings
-                <span class="price">Form 50$</span>
-                <span class="price-new">500$</span> Hotel
-              </div>
-              <div class="profile-info mt-3">
-                <img
-                  src="https://placehold.co/40x40"
-                  class="profile-img"
-                  alt="Profile image"
-                />
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incid ut labore et dolore magna aliqua....
-                </p>
+            <div class="col-md-3">
+              <div class="blog_box">
+                <div class="blog_img">
+                  <figure><img src="../images/blog2.jpg" alt="#" /></figure>
+                </div>
+                <div class="blog_room">
+                  <h3>Bed Room</h3>
+                  <span>The standard chunk </span>
+                  <p>
+                    If you are going to use a passage of Lorem Ipsum, you need
+                    to be sure there isn't anything embarrassing hidden in the
+                    middle of text. All the Lorem Ipsum generatorsIf you are
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              src="https://placehold.co/600x400"
-              class="card-img-top"
-              alt="Image of Europe Tour"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Europe Tour</h5>
-              <div class="rating">
-                <span class="badge badge-warning">5.0</span> 15 Ratings
-                <span class="price">Form 5k$</span>
-                <span class="price-new">10k$</span> Destination
+            <div class="col-md-3">
+              <div class="blog_box">
+                <div class="blog_img">
+                  <figure><img src="../images/blog3.jpg" alt="#" /></figure>
+                </div>
+                <div class="blog_room">
+                  <h3>Bed Room</h3>
+                  <span>The standard chunk </span>
+                  <p>
+                    If you are going to use a passage of Lorem Ipsum, you need
+                    to be sure there isn't anything embarrassing hidden in the
+                    middle of text. All the Lorem Ipsum generatorsIf you are
+                  </p>
+                </div>
               </div>
-              <div class="profile-info mt-3">
-                <img
-                  src="https://placehold.co/40x40"
-                  class="profile-img"
-                  alt="Profile image"
-                />
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incid ut labore et dolore magna aliqua....
-                </p>
+            </div>
+            <div class="col-md-3">
+              <div class="blog_box">
+                <div class="blog_img">
+                  <figure><img src="../images/blog2.jpg" alt="#" /></figure>
+                </div>
+                <div class="blog_room">
+                  <h3>Bed Room</h3>
+                  <span>The standard chunk </span>
+                  <p>
+                    If you are going to use a passage of Lorem Ipsum, you need
+                    to be sure there isn't anything embarrassing hidden in the
+                    middle of text. All the Lorem Ipsum generatorsIf you are
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- ĐOẠN 4 -->
-    <div class="container mt-5">
+      <!-- Xem thêm -->
       <div class="row">
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              alt="Image of a bungalow with a swimming pool"
-              class="card-img-top"
-              height="400"
-              src="https://storage.googleapis.com/a1aa/image/wlkfOn9W3ESiN6lIrBibCpmA6ITPxhbsHq5KdzuRiuRoCs6JA.jpg"
-              width="600"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Banglow With Swiming Pool</h5>
-              <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-purple text-white me-2"> 5.0 </span>
-                <span class="text-muted me-2"> 10 Ratings </span>
-                <span class="text-muted me-2"> Form 10k$-15k$ </span>
-                <span class="text-muted"> Real Estate </span>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  alt="Profile picture of the reviewer"
-                  class="rounded-circle me-2"
-                  height="100"
-                  src="https://storage.googleapis.com/a1aa/image/gIW7g6myeK0ZOaWsTtNjcPtim5ymjxsJ74nYaCuMf81PFY1TA.jpg"
-                  width="100"
-                />
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua....
-                </p>
-              </div>
-            </div>
-            <div
-              class="card-footer d-flex justify-content-between align-items-center"
-            >
-              <span class="text-danger"> Close Now </span>
-              <div>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-map-marker-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-share-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="far fa-heart"> </i>
-                </button>
-              </div>
-            </div>
-          </div>
+        <div class="col-12 text-md-center">
+          <button class="btn btn-outline-secondary">Xem thêm</button>
         </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              alt="Image of a vintage car expo"
-              class="card-img-top"
-              height="400"
-              src="https://storage.googleapis.com/a1aa/image/Gfeblr3V3Fl4YUqdLG4lepduVB2enAKaR6mC7JrewXjqpAreE.jpg"
-              width="600"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Vintage Car Expo</h5>
-              <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-success text-white me-2"> 4.2 </span>
-                <span class="text-muted me-2"> 8 Ratings </span>
-                <span class="text-muted me-2"> Form 500$-1200$ </span>
-                <span class="text-muted"> Automation </span>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  alt="Profile picture of the reviewer"
-                  class="rounded-circle me-2"
-                  height="100"
-                  src="https://storage.googleapis.com/a1aa/image/gIW7g6myeK0ZOaWsTtNjcPtim5ymjxsJ74nYaCuMf81PFY1TA.jpg"
-                  width="100"
-                />
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua....
-                </p>
-              </div>
-            </div>
-            <div
-              class="card-footer d-flex justify-content-between align-items-center"
-            >
-              <span class="text-success"> Open Now </span>
-              <div>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-map-marker-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-share-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="far fa-heart"> </i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card">
-            <img
-              alt="Image of a Thailand tour with a waterfall"
-              class="card-img-top"
-              height="400"
-              src="https://storage.googleapis.com/a1aa/image/8cBxsm0scvp8CZjX0V6RTUovZ68f6tJbmIUyDwA5idCpCs6JA.jpg"
-              width="600"
-            />
-            <div class="card-body">
-              <h5 class="card-title">Thailand Tour</h5>
-              <div class="d-flex align-items-center mb-3">
-                <span class="badge bg-orange text-white me-2"> 5.0 </span>
-                <span class="text-muted me-2"> 15 Ratings </span>
-                <span class="text-muted me-2"> Form 5k$-10k$ </span>
-                <span class="text-muted"> Destination </span>
-              </div>
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  alt="Profile picture of the reviewer"
-                  class="rounded-circle me-2"
-                  height="100"
-                  src="https://storage.googleapis.com/a1aa/image/gIW7g6myeK0ZOaWsTtNjcPtim5ymjxsJ74nYaCuMf81PFY1TA.jpg"
-                  width="100"
-                />
-                <p class="mb-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua....
-                </p>
-              </div>
-            </div>
-            <div
-              class="card-footer d-flex justify-content-between align-items-center"
-            >
-              <span class="text-danger"> Close Now </span>
-              <div>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-map-marker-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="fas fa-share-alt"> </i>
-                </button>
-                <button class="btn btn-link text-muted">
-                  <i class="far fa-heart"> </i>
-                </button>
-              </div>
-            </div>
-          </div>
+      </div>
+
+      <!-- Xem tất cả -->
+      <div class="row">
+        <div class="col-12 text-md-end">
+          <a href="ListPhong.html">
+            <button class="btn btn-secondary">Xem tất cả khách sạn</button>
+          </a>
         </div>
       </div>
     </div>
 
-    <!-- ĐOẠN 5 -->
-    <div class="container">
+    <!-- Đánh giá -->
+    <div class="container" id="review">
       <div class="section-title">
         <h2>CLIENTS REVIEWS</h2>
         <p>What our client say about us</p>
       </div>
-      <div class="row justify-content-center">
-        <div class="col-md-3">
-          <div class="review-card">
-            <img
-              alt="Portrait of Tom Leakar"
-              height="80"
-              src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
-              width="80"
-            />
-            <h5>Tom Leakar</h5>
-            <p>London, UK</p>
-            <div class="stars">
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-            </div>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              eaque.
-            </p>
+      <div class="slick-slider">
+        <!-- ... thêm các review-card khác ở đây ... -->
+        <div class="review-card">
+          <img
+            alt="Portrait of Tom Leakar"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
+            width="80"
+          />
+          <h5>Tom Leakar</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
           </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
         </div>
-        <div class="col-md-3">
-          <div class="review-card">
-            <img
-              alt="Portrait of Tom Leakar"
-              height="80"
-              src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
-              width="80"
-            />
-            <h5>Tom Leakar</h5>
-            <p>London, UK</p>
-            <div class="stars">
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-            </div>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              eaque.
-            </p>
+        <!-- ... thêm các review-card khác ở đây ... -->
+
+        <div class="review-card">
+          <img
+            alt="Portrait of Shohrab Hossain"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/A6KFyF5y207fd652XA0UeVZjUU6VDCE4IqEmo1onwn8vIY1TA.jpg"
+            width="80"
+          />
+          <h5>Shohrab Hossain</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
           </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
         </div>
-        <div class="col-md-3">
-          <div class="review-card active">
-            <img
-              alt="Portrait of Monirul Islam"
-              height="80"
-              src="https://storage.googleapis.com/a1aa/image/CX1L7xAtLVZLJ15NdTmZ3FreetoEmSgjl2Z6sFzAIS2yIY1TA.jpg"
-              width="80"
-            />
-            <h5>Monirul Islam</h5>
-            <p>London, UK</p>
-            <div class="stars">
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-            </div>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              eaque.
-            </p>
+        <!-- ... thêm các review-card khác ở đây ... -->
+        <div class="review-card">
+          <img
+            alt="Portrait of Tom Leakar"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
+            width="80"
+          />
+          <h5>Tom Leakar</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
           </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
         </div>
-        <div class="col-md-3">
-          <div class="review-card">
-            <img
-              alt="Portrait of Shohrab Hossain"
-              height="80"
-              src="https://storage.googleapis.com/a1aa/image/A6KFyF5y207fd652XA0UeVZjUU6VDCE4IqEmo1onwn8vIY1TA.jpg"
-              width="80"
-            />
-            <h5>Shohrab Hossain</h5>
-            <p>London, UK</p>
-            <div class="stars">
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-            </div>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              eaque.
-            </p>
+        <!-- ... thêm các review-card khác ở đây ... -->
+
+        <div class="review-card">
+          <img
+            alt="Portrait of Shohrab Hossain"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/A6KFyF5y207fd652XA0UeVZjUU6VDCE4IqEmo1onwn8vIY1TA.jpg"
+            width="80"
+          />
+          <h5>Shohrab Hossain</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
           </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
         </div>
-        <div class="col-md-3">
-          <div class="review-card">
-            <img
-              alt="Portrait of Tom Leakar"
-              height="80"
-              src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
-              width="80"
-            />
-            <h5>Tom Leakar</h5>
-            <p>London, UK</p>
-            <div class="stars">
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-              <i class="fas fa-star"> </i>
-            </div>
-            <p>
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-              officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-              eaque.
-            </p>
+        <!-- ... thêm các review-card khác ở đây ... -->
+        <div class="review-card">
+          <img
+            alt="Portrait of Monirul Islam"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/CX1L7xAtLVZLJ15NdTmZ3FreetoEmSgjl2Z6sFzAIS2yIY1TA.jpg"
+            width="80"
+          />
+          <h5>Monirul Islam</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
           </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
         </div>
+        <!-- ... thêm các review-card khác ở đây ... -->
+
+        <div class="review-card">
+          <img
+            alt="Portrait of Shohrab Hossain"
+            height="80"
+            src="https://storage.googleapis.com/a1aa/image/A6KFyF5y207fd652XA0UeVZjUU6VDCE4IqEmo1onwn8vIY1TA.jpg"
+            width="80"
+          />
+          <h5>Shohrab Hossain</h5>
+          <p>London, UK</p>
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+          </div>
+          <p>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt mollit anim id est laborum. Sed ut perspiciatis
+            eaque.
+          </p>
+        </div>
+        <!-- ... thêm các review-card khác ở đây ... -->
       </div>
     </div>
-    <div class="footer">
-      <div class="left">
-        <h5>TravelBooking</h5>
-        <p>Khám phá thế giới dễ dàng<br />Đặt ngay trên TravelBooking</p>
-      </div>
-      <div class="right">
-        <h5>Nhóm 5</h5>
-        <p>Nguyễn Kiến Quốc<br />Hà Ngọc Huy</p>
-      </div>
-    </div>
+
+    
     <script>
       src =
         "https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js";
