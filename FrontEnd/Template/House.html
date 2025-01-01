@@ -248,21 +248,13 @@
                 <label for="date-out">Check Out:</label>
                 <input type="date" class="date-input" id="date-out" />
               </div>
-              <div class="check">
-                <label for="guest">Guests:</label>
-                <input type="text" placeholder="Enter the number of people" />
-              </div>
-              <div class="check">
-                <label for="room">Room:</label>
-                <input type="text" placeholder="Enter the number of rooms" />
-              </div>
               <button type="submit">Check Availability</button>
             </form>
           </div>
         </div>
       </div>
       <!-- tiện ích -->
-      <table class="mt-1">
+      <!-- <table class="mt-1">
         <tbody>
           <tr>
             <td class="r-o">Size:</td>
@@ -281,14 +273,15 @@
             <td>Wifi, Television, Bathroom,...</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
       <!-- mô tả phòng -->
       <p
-        class="mt-2"
+        class="mt-5"
         style="
           text-align: justify;
           text-justify: inter-word;
           margin-bottom: 35px;
+          color: rgb(125, 125, 125);
         "
       >
         Nằm ở thành phố, Ruby Halong 6 Hotel ở Hạ Long cung cấp chỗ nghỉ có
@@ -308,10 +301,10 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th class="col-3">Loại căn hộ</th>
-            <th class="col-2">Số lượng khách</th>
+            <th class="col-4">Loại căn hộ</th>
+            <th class="col-1">Số lượng khách</th>
             <th class="col-4">Giá cho 1 đêm</th>
-            <th class="col-1">Chọn <br />căn hộ</th>
+            <th class="col-1">Chọn phòng</th>
             <th class="col-2"></th>
           </tr>
         </thead>
@@ -322,17 +315,12 @@
                 Phòng Tiêu Chuẩn Có Giường Cỡ King
                 <br />
               </button>
-              <p>1 giường đôi cực lớn</p>
-              </td>
-            <td>
-              2 người lớn<br />
-              2 trẻ em
             </td>
+            <td>2 <br /></td>
             <td>
               <span class="text-primary">VND 1,719,000</span><br />
               <small class="text-muted">Đã bao gồm thuế và phí</small><br />
-              <span class="badge bg-primary">Tiết kiệm 40%</span>
-              <span class="badge bg-warning text-dark"
+              <span class="badge bg-primary"
                 >Ưu đãi Trong Thời Gian Có Hạn</span
               >
             </td>
@@ -350,7 +338,7 @@
               </select>
             </td>
             <!-- nút đặt phòng -->
-            <td rowspan="5">
+            <td>
               <button
                 class="btn btn-primary w-100"
                 data-bs-toggle="modal"
@@ -359,10 +347,6 @@
               >
                 Đặt phòng
               </button>
-              <ul class="icon-list mt-2">
-                <li>Chỉ mất có 2 phút</li>
-                <li>Xác nhận tức thời</li>
-              </ul>
             </td>
           </tr>
 
@@ -392,6 +376,16 @@
                 <option value="3">3</option>
               </select>
             </td>
+            <td>
+              <button
+                class="btn btn-primary w-100"
+                data-bs-toggle="modal"
+                data-bs-target="#bookingModal"
+                style="color: #ebf1f7; font-weight: 700; text-align: center"
+              >
+                Đặt phòng
+              </button>
+            </td>
           </tr>
 
           <tr>
@@ -419,6 +413,16 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
               </select>
+            </td>
+            <td>
+              <button
+                class="btn btn-primary w-100"
+                data-bs-toggle="modal"
+                data-bs-target="#bookingModal"
+                style="color: #ebf1f7; font-weight: 700; text-align: center"
+              >
+                Đặt phòng
+              </button>
             </td>
           </tr>
 
@@ -454,15 +458,15 @@
       <!-- đánh giá-->
       <h2 style="margin-left: 7px; margin-top: 50px">Đánh giá của khách</h2>
       <div class="slick-slider">
-        <div class="review-card">
+        <!-- <div class="review-card">
           <img
             alt="Portrait of Tom Leakar"
             height="80"
             src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
             width="80"
           />
-          <h5>Tom Leakar</h5>
-          <p>London, UK</p>
+          <h5>$feedbackSummaryList</h5>
+          <p>Việt Nam</p>
           <div class="stars">
             <i class="fas fa-star"> </i>
             <i class="fas fa-star"> </i>
@@ -486,7 +490,6 @@
             >Tìm hiểu thêm</a
           >
         </div>
-        <!--  -->
         <div class="review-card">
           <img
             alt="Portrait of Monirul Islam"
@@ -520,7 +523,6 @@
             >Tìm hiểu thêm</a
           >
         </div>
-        <!--  -->
         <div class="review-card">
           <img
             alt="Portrait of Shohrab Hossain"
@@ -553,7 +555,6 @@
             >Tìm hiểu thêm</a
           >
         </div>
-        <!--  -->
         <div class="review-card">
           <img
             alt="Portrait of Shohrab Hossain"
@@ -586,7 +587,6 @@
             >Tìm hiểu thêm</a
           >
         </div>
-
         <div class="review-card">
           <img
             alt="Portrait of Monirul Islam"
@@ -620,7 +620,6 @@
             >Tìm hiểu thêm</a
           >
         </div>
-        <!--  -->
         <div class="review-card">
           <img
             alt="Portrait of Shohrab Hossain"
@@ -652,8 +651,9 @@
             data-bs-target="#feedbackModal"
             >Tìm hiểu thêm</a
           >
-        </div>
+        </div> -->
       </div>
+
       <!-- thêm đánh giá -->
       <div class="mt-4">
         <button
