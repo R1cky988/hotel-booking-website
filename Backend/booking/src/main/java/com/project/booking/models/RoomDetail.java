@@ -22,7 +22,7 @@ public class RoomDetail {
     @Column(name = "id")
     private Long id;
 
-    private Boolean available;
+    private Long available;
 
     private String url;
 
@@ -36,6 +36,9 @@ public class RoomDetail {
 
     @Column(name = "check_out")
     private Date checkOut;
+
+    @Column(name = "room_name")
+    private String roomName;
 
     @Column(name = "price_per_night")
     private Long pricePerNight;

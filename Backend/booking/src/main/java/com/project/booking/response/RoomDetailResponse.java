@@ -17,7 +17,7 @@ import java.util.List;
 public class RoomDetailResponse {
     private Long id;
 
-    private Boolean available;
+    private Long available;
 
     private String url;
 

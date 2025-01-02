@@ -16,6 +16,6 @@ public class UserLoginDTO {
     private String email;
 
     @NotBlank(message =  "Password cannot be blank")
-    @Size(min = 6, max = 20, message = "Password must between 6 and 20 characters")
+    @Size(min = 6, max = 20, message = "Mật khẩu phải từ 6 đến 20 ký tự")
     private String password;
 }

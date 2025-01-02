@@ -18,6 +18,7 @@ public class FeedbackDetailResponse {
 
     private Long id;
 
+    private String room;
 
     private String name;
 
@@ -33,6 +34,7 @@ public class FeedbackDetailResponse {
     public static FeedbackDetailResponse fromDetail(FeedbackDetail feedbackDetail){
         FeedbackDetailResponse feedbackDetailResponse = FeedbackDetailResponse.builder()
                 .id(feedbackDetail.getId())
+                .room(feedbackDetail.getRoom().getRoomName())
                 .name(feedbackDetail.getName())
                 .userId(feedbackDetail.getUserId().getId())
                 .comment(feedbackDetail.getComment())

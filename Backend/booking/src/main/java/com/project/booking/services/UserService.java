@@ -31,7 +31,7 @@ public class UserService implements IUserService{
         }
 
         if(email != null && usersRepository.existsByEmail(email)){
-            throw new DataIntegrityViolationException("Email already exist");
+            throw new DataIntegrityViolationException("Email đã tồn tại!");
         }
 
         Users newUser = Users
@@ -79,12 +79,12 @@ public class UserService implements IUserService{
         Optional<Users> optionalUser = usersRepository.findByEmail(email);
 
         if(optionalUser.isEmpty()) {
-            throw new DataNotFoundException("Invalid email/password");
+            throw new DataNotFoundException("Email/Mật khẩu không chính xác");
         }
         Users existingUser = optionalUser.get();
-        if (existingUser.getPassword().equals(password)){
+        if (passwordEncoder.matches(password, existingUser.getPassword())){
             return existingUser;
         }
-        else throw new RuntimeException("password is not correct");
+        else throw new RuntimeException("Email/Mật khẩu không chính xác");
     }
 }

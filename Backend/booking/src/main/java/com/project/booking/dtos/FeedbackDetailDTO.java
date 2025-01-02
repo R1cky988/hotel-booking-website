@@ -17,6 +17,8 @@ public class FeedbackDetailDTO {
     @JsonProperty("feedback_summary_id")
     private Long feedbackSummaryId;
 
+    private Long roomId;
+
     @NotNull
     @JsonProperty("name")
     private String name;

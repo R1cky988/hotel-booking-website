@@ -11,6 +11,7 @@ import com.project.booking.services.RoomImageService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.UrlResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,6 +65,22 @@ public class RoomDetailController {
             return ResponseEntity.ok(roomDetailResponseList);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/available")
+    public ResponseEntity<?> getAvailableRooms(
+            @RequestParam Long hotelId,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkInDate,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") Date checkOutDate) {
+
+        List<RoomDetail> availableRooms = roomDetailService.getAvailableRooms(hotelId, checkInDate, checkOutDate);
+
+        if (!availableRooms.isEmpty()) {
+            return ResponseEntity.ok(availableRooms);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No rooms available for the selected dates.");
         }
     }
 

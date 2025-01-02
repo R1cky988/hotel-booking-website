@@ -35,7 +35,7 @@ public class WebSecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:5500", "http://127.0.0.1:5500")); // Cho phép frontend gọi API
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://127.0.0.1:3000")); // Cho phép frontend gọi API
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         configuration.setAllowCredentials(true); // Hỗ trợ cookie nếu cần

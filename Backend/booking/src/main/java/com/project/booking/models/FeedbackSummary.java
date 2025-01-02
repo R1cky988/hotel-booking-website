@@ -20,8 +20,8 @@ public class FeedbackSummary extends Time{
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
-    private RoomDetail room;
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
     @Column(name = "rating")
     private double rate;

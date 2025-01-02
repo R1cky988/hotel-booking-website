@@ -12,8 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public class FeedbackSummaryDTO {
     @NotNull
-    @JsonProperty("room_id")
-    private Long roomId;
+    @JsonProperty("hotel_id")
+    private Long hotelId;
 
     private Long rating;
 

@@ -1,9 +1,11 @@
 package com.project.booking.dtos;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Builder
@@ -14,19 +16,21 @@ import java.util.Date;
 @AllArgsConstructor
 public class BookingDetailDTO {
 
-    @NotNull
+    @NotNull(message = "room id must not be null")
     @JsonProperty("room_id")
     private Long roomId;
 
-    @NotNull
+    @NotNull(message = "user id must not be null")
     @JsonProperty("user_id")
     private Long userId;
 
     @JsonProperty("check_in")
-    private Date checkIn;
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkIn;
 
     @JsonProperty("check_out")
-    private Date checkOut;
+    //@JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkOut;
 
     private String name;
 
@@ -38,5 +42,8 @@ public class BookingDetailDTO {
     @JsonProperty("special_request")
     private String specialRequest;
 
+    private String roomName;
+
+    private Long requireRoom;
 
 }

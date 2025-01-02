@@ -1,0 +1,125 @@
+<html xmlns:th="http://www.thymeleaf.org">  <head>
+    <link
+      crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .review-card {
+        background-color: white;
+        border-radius: 10px;
+        padding: 10px;
+      }
+      .review-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .review-header img {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+      }
+      .review-header .country {
+        display: flex;
+        align-items: center;
+      }
+      .review-header .country img {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+      }
+      .review-date {
+        color: #6c757d;
+        font-size: 14px;
+      }
+      .review-title {
+        font-size: 24px;
+        font-weight: bold;
+      }
+      .review-content {
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      .review-rating {
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+      .review-emoji {
+        color: #28a745;
+        font-size: 24px;
+        margin-right: 10px;
+      }
+      .review-card .stars {
+        color: #ffc107;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="review-card">
+        <div class="review-header">
+          <img
+            alt="Portrait of Tom Leakar"
+            height="50"
+            src="https://storage.googleapis.com/a1aa/image/NMrHU2RTww7VIFM2AfoF4Dt56YeSKEeoMR7dkMP5hAfEjgVPB.jpg"
+            width="50"
+          />
+          <div>
+            <div><b>Tom Leakar</b></div>
+            <div class="country">
+              <span> London, UK </span>
+            </div>
+          </div>
+          <div class="review-rating">10</div>
+        </div>
+        <div class="review-date">Ngày đánh giá: 2024-11-13</div>
+        <div class="review-title">Xuất sắc</div>
+        <div class="review-content">
+          <div class="stars">
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+            <i class="fas fa-star"> </i>
+          </div>
+          <p>
+            Khách sạn này thực sự là một trong những lựa chọn xuất sắc nhất mà
+            tôi từng có dịp lưu trú tại Sài Gòn! Phòng ở rất thoải mái, sạch sẽ
+            và được trang bị đầy đủ tiện nghi. Mọi chi tiết nhỏ trong phòng đều
+            cho thấy sự quan tâm chu đáo của khách sạn dành cho khách hàng, từ
+            giường nệm êm ái đến những vật dụng nhỏ xinh được sắp xếp cẩn thận.
+          </p>
+         
+          <p>
+            Tóm lại, đây chắc chắn là nơi mà tôi sẽ quay lại trong những lần tới
+            và sẽ giới thiệu cho bạn bè nếu họ muốn tìm một chỗ nghỉ tuyệt vời ở
+            Sài Gòn. Cảm ơn đội ngũ khách sạn đã cho tôi một kỳ nghỉ đáng nhớ!
+          </p>
+        </div>
+      </div>
+    </div>
+  
+  </body>
+</html>

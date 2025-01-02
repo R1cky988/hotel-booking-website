@@ -17,9 +17,16 @@ document.querySelector("form").addEventListener("submit", async function (e) {
         });
 
         if (response.ok) {
-            const data = await response.json();
+            const user = await response.json();
+            // Lưu thông tin người dùng vào localStorage
+            localStorage.setItem('user', JSON.stringify({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            }));
             alert("Đăng ký thành công!");
-            console.log(data);
+            console.log(user);
+            window.location.href = "http://localhost:3000/Template/Login";
         } else {
             const error = await response.json();
             alert("Đăng ký thất bại: " + error.join(", "));

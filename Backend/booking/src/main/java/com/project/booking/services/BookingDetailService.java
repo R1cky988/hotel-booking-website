@@ -19,26 +19,31 @@ public class BookingDetailService {
     private final UsersRepository usersRepository;
     private final RoomDetailRepository roomDetailRepository;
 
-    public BookingDetail createBookingForm(BookingDetailDTO bookingDetailDTO){
+    public BookingDetail createBookingForm(BookingDetailDTO bookingDetailDTO) throws Exception {
         Users existingUser = usersRepository.findById(bookingDetailDTO.getUserId())
                 .orElseThrow(()->new DataNotFoundException(
                         "Cannot find user with id: " + bookingDetailDTO.getUserId()));
         RoomDetail existingRoom = roomDetailRepository.findById(bookingDetailDTO.getRoomId())
                 .orElseThrow(() -> new DataNotFoundException("Room not exist"));
-        if(!existingRoom.getAvailable()){
+        if(existingRoom.getAvailable() <= 0){
             throw new DataNotFoundException("Room is not available");
+        }
+        if(bookingDetailDTO.getCheckOut().isBefore(bookingDetailDTO.getCheckIn())){
+            throw new Exception("Ngày nhận phòng phải trước ngày trả phòng");
         }
         BookingDetail newForm = BookingDetail.builder()
                 .userId(existingUser)
                 .roomId(existingRoom)
                 .checkIn(bookingDetailDTO.getCheckIn())
                 .checkOut(bookingDetailDTO.getCheckOut())
-                .name(bookingDetailDTO.getName())
+                .name(existingUser.getFirstName() + " " + existingUser.getLastName())
                 .phone(bookingDetailDTO.getPhone())
-                .email(bookingDetailDTO.getEmail())
+                .email(existingUser.getEmail())
                 .specialRequest(bookingDetailDTO.getSpecialRequest())
+                .roomName(existingRoom.getRoomName())
+                .numberOfRoom(bookingDetailDTO.getRequireRoom())
                 .build();
-        existingRoom.setAvailable(false);
+        existingRoom.setAvailable(existingRoom.getAvailable() - newForm.getNumberOfRoom());
         return bookingDetailRepository.save(newForm);
     }
 
@@ -46,14 +51,16 @@ public class BookingDetailService {
         BookingDetail bookingDetail = bookingDetailRepository.findById(id)
                 .orElseThrow(()-> new DataNotFoundException("Cannot find form"));
         Long totalDate = bookingDetailRepository.getDateDiffById(id);
-        Long totalPrice = totalDate * bookingDetail.getRoomId().getPricePerNight();
+        Long totalPrice = totalDate * bookingDetail.getRoomId().getPricePerNight() * bookingDetail.getNumberOfRoom();
         return BookingResponse.fromBooking(bookingDetail, totalPrice);
     }
 
     public void deleteBookingForm(Long formId){
         BookingDetail bookingDetail = bookingDetailRepository.findById(formId)
                 .orElseThrow(()-> new DataNotFoundException("Cannot find form"));
-        bookingDetail.getRoomId().setAvailable(true);
+        bookingDetail.getRoomId().setAvailable(bookingDetail.getRoomId().getAvailable() + bookingDetail.getNumberOfRoom());
         bookingDetailRepository.deleteById(formId);
     }
+
+
 }

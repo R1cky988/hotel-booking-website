@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoomDetailDTO {
-    private Boolean available;
+    private Long available;
 
     private String url;
 
@@ -34,6 +34,9 @@ public class RoomDetailDTO {
 
     @JsonProperty("price_per_night")
     private Long pricePerNight;
+
+    @JsonProperty("room_name")
+    private String roomName;
 
     @JsonProperty("hotel_id")
     private Long hotelId;

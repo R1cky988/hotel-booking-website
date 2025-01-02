@@ -38,7 +38,7 @@ public class FeedbackSummaryResponse {
 
         FeedbackSummaryResponse feedbackSummaryResponse = FeedbackSummaryResponse.builder()
                 .id(feedbackSummary.getId())
-                .roomId(feedbackSummary.getRoom().getId())
+                .roomId(feedbackSummary.getHotel().getId())
                 .rating(averageRating)
                 .feedbackDetails(feedbackDetailResponses)
                 .build();

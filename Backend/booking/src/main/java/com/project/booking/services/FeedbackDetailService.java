@@ -4,9 +4,11 @@ import com.project.booking.dtos.FeedbackDetailDTO;
 import com.project.booking.exceptions.DataNotFoundException;
 import com.project.booking.models.FeedbackDetail;
 import com.project.booking.models.FeedbackSummary;
+import com.project.booking.models.RoomDetail;
 import com.project.booking.models.Users;
 import com.project.booking.repositories.FeedbackDetailRepository;
 import com.project.booking.repositories.FeedbackSummaryRepository;
+import com.project.booking.repositories.RoomDetailRepository;
 import com.project.booking.repositories.UsersRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class FeedbackDetailService {
     private final FeedbackDetailRepository feedbackDetailRepository;
     private final FeedbackSummaryRepository feedbackSummaryRepository;
     private final UsersRepository usersRepository;
-
+    private final RoomDetailRepository roomDetailRepository;
 
     public FeedbackDetail createFeedback(FeedbackDetailDTO feedbackDetailDTO){
         FeedbackSummary existingSummary = feedbackSummaryRepository.
@@ -25,9 +27,12 @@ public class FeedbackDetailService {
                 .orElseThrow(()->new DataNotFoundException("Cannot find"));
         Users users = usersRepository.findById(feedbackDetailDTO.getUserId())
                 .orElseThrow(()->new DataNotFoundException("Cannot find user"));
+        RoomDetail roomDetail = roomDetailRepository.findById(feedbackDetailDTO.getRoomId())
+                .orElseThrow(() -> new DataNotFoundException("Cannot find room"));
 
         FeedbackDetail newFeedback = FeedbackDetail.builder()
                 .feedbackSummary(existingSummary)
+                .room(roomDetail)
                 .rate(feedbackDetailDTO.getRating())
                 .name(feedbackDetailDTO.getName())
                 .comment(feedbackDetailDTO.getComment())

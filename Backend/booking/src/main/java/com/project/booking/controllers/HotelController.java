@@ -8,6 +8,7 @@ import com.project.booking.services.HotelImageService;
 import com.project.booking.services.HotelService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.Banner;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -30,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/hotel")
 public class HotelController {
@@ -144,14 +147,18 @@ public class HotelController {
 
     }
     @GetMapping("/{hotelId}")
-    public ResponseEntity<?> getHotel(
-            @PathVariable("hotelId") Long hotelId
+    public String getHotel(
+            @PathVariable("hotelId") Long hotelId,
+            Model model
     ){
         try{
             Hotel hotel = hotelService.getHotelById(hotelId);
-            return ResponseEntity.ok(hotel);
+            return "House";
+            //return ResponseEntity.ok(hotel);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("error", e.getMessage());
+            //return ResponseEntity.badRequest().body(e.getMessage());
+            return "House";
         }
     }
 

@@ -12,6 +12,7 @@ import com.project.booking.response.RoomDetailResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +28,7 @@ public class RoomDetailService {
                 .orElseThrow(() -> new DataNotFoundException(
                         "Cannot find room with id: " + roomDetailDTO.getHotelId()));
         RoomDetail newRoom = RoomDetail.builder()
-                .available(true)
+                .available(roomDetailDTO.getAvailable())
                 .url(roomDetailDTO.getUrl())
                 .roomType(roomDetailDTO.getRoomType())
                 .persons(roomDetailDTO.getPersons())
@@ -66,6 +67,10 @@ public class RoomDetailService {
                 .roomDetailResponseList(roomDetailResponses)
                 .build();
 
+    }
+
+    public List<RoomDetail> getAvailableRooms(Long hotelId, Date checkInDate, Date checkOutDate) {
+        return roomDetailRepository.findAvailableRooms(hotelId, checkInDate, checkOutDate);
     }
 
     public RoomDetail getRoomById(Long roomId){

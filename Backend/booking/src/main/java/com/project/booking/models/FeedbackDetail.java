@@ -29,6 +29,10 @@ public class FeedbackDetail {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private RoomDetail room;
+
     @OneToOne
     @JoinColumn(name = "user_id")
     private Users userId;

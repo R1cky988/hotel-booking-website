@@ -3,6 +3,7 @@ package com.project.booking.models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -27,10 +28,10 @@ public class BookingDetail {
     private Users userId;
 
     @Column(name = "check_in")
-    private Date checkIn;
+    private LocalDate checkIn;
 
     @Column(name = "check_out")
-    private Date checkOut;
+    private LocalDate checkOut;
 
     @Column(name = "name")
     private String name;
@@ -43,5 +44,11 @@ public class BookingDetail {
 
     @Column(name = "special_request")
     private String specialRequest;
+
+    @Column(name = "number_of_room")
+    private Long numberOfRoom;
+
+    @Column(name = "room_name")
+    private String roomName;
 
 }

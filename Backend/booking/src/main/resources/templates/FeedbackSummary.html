@@ -1,0 +1,243 @@
+<html xmlns:th="http://www.thymeleaf.org">  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .review-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 8px;
+      }
+      .review-card img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+      }
+      .review-card .name {
+        font-weight: bold;
+      }
+      .review-card .country {
+        display: flex;
+        align-items: center;
+      }
+      .review-card .country img {
+        width: 20px;
+        height: 20px;
+        margin-right: 4px;
+      }
+      .review-card .read-more {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .review-card .read-more:hover {
+        text-decoration: underline;
+      }
+      .carousel-control-prev,
+      .carousel-control-next {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        background-color: rgb(212, 212, 212);
+        border-radius: 50%;
+        border: 1px solid rgb(255, 255, 255); /* Đổi viền thành màu đen */
+        color: black; /* Đổi màu biểu tượng thành màu đen */
+      }
+
+      .carousel-control-prev:hover,
+      .carousel-control-next:hover {
+        background-color: rgb(186, 186, 186);
+        color: white; /* Mũi tên đổi thành màu trắng khi hover */
+      }
+
+      .rating {
+        background-color: #0056b3;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      .btn-read-all {
+        border: 1px solid #007bff;
+        color: #007bff;
+        background-color: white;
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+      }
+      .btn-read-all:hover {
+        background-color: #007bff;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <h2>Đánh giá của khách</h2>
+      <div class="d-flex align-items-center mb-3">
+        <div class="rating me-2">9,3</div>
+        <div>
+          <span>Tuyệt hảo · 32 đánh giá</span>
+        </div>
+      </div>
+      <div
+        id="carouselExampleControls"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-between">
+              <div class="col-3">
+                <div class="review-card h-100">
+                  <div class="d-flex align-items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40"
+                      alt="Profile picture of Ha"
+                    />
+                    <div class="ms-2">
+                      <div class="name">Ha</div>
+                      <div class="country">
+                        <img
+                          src="https://placehold.co/20x20"
+                          alt="Vietnam flag"
+                        />
+                        <span>Việt Nam</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  “Khách sạn rất đẹp. Mức giá thực sự rất tốt cho mình và chồng
+                  trong tuần trăng mật. Phòng rất sạch sẽ và nhân viên thân
+                  thiện”
+                </p>
+                <a href="#" class="read-more">Tìm hiểu thêm</a>
+              </div>
+              <div class="col-3">
+                <div class="review-card h-100">
+                  <div class="d-flex align-items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40"
+                      alt="Profile picture of Trúc"
+                    />
+                    <div class="ms-2">
+                      <div class="name">Trúc</div>
+                      <div class="country">
+                        <img
+                          src="https://placehold.co/20x20"
+                          alt="Vietnam flag"
+                        />
+                        <span>Việt Nam</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  “Khách sạn này thực sự là một trong những lựa chọn xuất sắc
+                  nhất mà tôi từng có dịp lưu trú tại Sài Gòn! Phòng ở rất thoải
+                  mái, sạch sẽ và được trang bị đầy đủ tiện nghi. Mọi chi tiết
+                  nhỏ trong phòng đều cho thấy sự quan tâm chu đáo của khách
+                  sạn...”
+                </p>
+                <a href="#" class="read-more">Tìm hiểu thêm</a>
+              </div>
+
+              <div class="col-3">
+                <div class="review-card h-100">
+                  <div class="d-flex align-items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40"
+                      alt="Profile picture of Quỳnh"
+                    />
+                    <div class="ms-2">
+                      <div class="name">Quỳnh</div>
+                      <div class="country">
+                        <img
+                          src="https://placehold.co/20x20"
+                          alt="Vietnam flag"
+                        />
+                        <span>Việt Nam</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  “Một trải nghiệm tuyệt vời! Khách sạn có thiết kế đẹp, phòng
+                  sạch sẽ và rộng rãi. Đặc biệt là phòng tắm rất tiện nghi và
+                  sang trọng. Nhân viên rất thân thiện, chu đáo và hỗ trợ nhiệt
+                  tình, luôn sẵn sàng giúp đỡ khi tôi cần. Vị trí khách sạn
+                  rất...”
+                </p>
+                <a href="#" class="read-more">Tìm hiểu thêm</a>
+              </div>
+              <div class="col-3">
+                <div class="review-card h-100">
+                  <div class="d-flex align-items-center mb-2">
+                    <img
+                      src="https://placehold.co/40x40"
+                      alt="Profile picture of Quỳnh"
+                    />
+                    <div class="ms-2">
+                      <div class="name">Quỳnh</div>
+                      <div class="country">
+                        <img
+                          src="https://placehold.co/20x20"
+                          alt="Vietnam flag"
+                        />
+                        <span>Việt Nam</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <p>
+                  “Một trải nghiệm tuyệt vời! Khách sạn có thiết kế đẹp, phòng
+                  sạch sẽ và rộng rãi. Đặc biệt là phòng tắm rất tiện nghi và
+                  sang trọng. Nhân viên rất thân thiện, chu đáo và hỗ trợ nhiệt
+                  tình, luôn sẵn sàng giúp đỡ khi tôi cần. Vị trí khách sạn
+                  rất...”
+                </p>
+                <a href="#" class="read-more">Tìm hiểu thêm</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleControls"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+      <div class="mt-4">
+        <a href="#" class="btn-read-all" style="margin-top:500px">Đọc tất cả đánh giá</a>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ import com.project.booking.models.BookingDetail;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -16,17 +17,17 @@ public class BookingResponse {
 
     private Long id;
 
-    @JsonProperty("room_id")
-    private Long roomId;
+    @JsonProperty("room_name")
+    private String roomId;
 
     @JsonProperty("user_id")
     private Long userId;
 
     @JsonProperty("check_in")
-    private Date checkIn;
+    private String checkIn;
 
     @JsonProperty("check_out")
-    private Date checkOut;
+    private String checkOut;
 
     private String name;
 
@@ -41,17 +42,23 @@ public class BookingResponse {
     @JsonProperty("total_price")
     private Long totalPrice;
 
+    private Long totalRoom;
+
+    private String roomName;
+
     public static BookingResponse fromBooking(BookingDetail bookingDetail, Long totalPrice){
         return BookingResponse.builder()
                 .id(bookingDetail.getId())
                 .userId(bookingDetail.getUserId().getId())
-                .roomId(bookingDetail.getRoomId().getId())
-                .checkIn(bookingDetail.getCheckIn())
-                .checkOut(bookingDetail.getCheckOut())
+                .roomId(bookingDetail.getRoomId().getRoomName())
+                .checkIn(bookingDetail.getCheckIn().toString())
+                .checkOut(bookingDetail.getCheckOut().toString())
                 .name(bookingDetail.getName())
                 .phone(bookingDetail.getPhone())
                 .email(bookingDetail.getEmail())
                 .specialRequest(bookingDetail.getSpecialRequest())
+                .roomName(bookingDetail.getRoomName())
+                .totalRoom(bookingDetail.getNumberOfRoom())
                 .totalPrice(totalPrice)
                 .build();
          //bookingResponse;
