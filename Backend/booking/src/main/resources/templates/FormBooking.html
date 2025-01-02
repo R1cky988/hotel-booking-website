@@ -173,8 +173,9 @@
                   id="name"
                   placeholder="Nhập tên đầy đủ của bạn"
                   th:value="${session.user.firstName + ' ' + session.user.lastName}"
-                  readonly
                 />
+<!--                  readonly-->
+
               </div>
 
               <div class="mb-3">
@@ -186,9 +187,9 @@
                   class="form-control"
                   id="email"
                   placeholder="Nhập email của bạn"
-                  th:value="${session.user.email}"
-                  readonly
-                />
+                  th:value="${session.user.email}"/>
+<!--                  readonly-->
+
               </div>
               <div class="mb-3">
                 <label for="phone" class="form-label"
