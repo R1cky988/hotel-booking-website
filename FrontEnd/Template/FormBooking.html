@@ -54,6 +54,11 @@
       .booking-form label {
         color: #18528f;
       }
+      .booking-form h2 {
+        color: #18528f;
+        text-align: center;
+        padding: 10px;
+      }
     </style>
   </head>
   <body>
@@ -62,6 +67,7 @@
       <div class="row justify-content-center">
         <div class="col-md-12">
           <div class="booking-form">
+            <h2><b>Đặt phòng trực tuyến</b></h2>
             <form>
               <div class="mb-3">
                 <label for="name" class="form-label"
@@ -95,6 +101,18 @@
                   id="phone"
                   placeholder="Nhập số điện thoại của bạn"
                 />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label"><b>Loại phòng</b></label>
+                <input
+                  class="form-control"
+                  value="Phòng Deluxe giường đôi"
+                  readonly
+                />
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label"><b>Số lượng</b></label>
+                <input class="form-control" value="2" readonly />
               </div>
               <div class="mb-3">
                 <label for="checkin" class="form-label"
