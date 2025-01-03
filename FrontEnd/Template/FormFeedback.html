@@ -66,13 +66,14 @@
             >
               Đánh giá trải nghiệm của bạn
             </h2>
-            <form style="background: #f7f7f7; padding: 20px">
+            <form id="feedbackForm" style="background: #f7f7f7; padding: 20px">
               <div class="mb-3">
                 <label for="name" class="form-label">Tên của bạn</label>
                 <input
                   type="text"
                   class="form-control"
                   id="name"
+                  name="name"
                   placeholder="Nhập tên của bạn"
                 />
               </div>
@@ -82,6 +83,7 @@
                   type="email"
                   class="form-control"
                   id="email"
+                  name="email"
                   placeholder="Nhập email của bạn"
                 />
               </div>
@@ -90,11 +92,11 @@
                 <textarea
                   class="form-control"
                   id="comments"
+                  name="comments"
                   rows="4"
                   placeholder="Nhập bình luận của bạn"
                 ></textarea>
               </div>
-
               <div class="mb-3">
                 <div class="rating">
                   <label
@@ -131,6 +133,133 @@
             document.querySelectorAll(".rating i")[i].classList.remove("far");
             document.querySelectorAll(".rating i")[i].classList.add("fas");
           }
+        });
+      });
+    </script>
+    <script>
+      // Bắt sự kiện khi form được gửi
+      document
+        .getElementById("feedbackForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault(); // Ngăn tải lại trang
+
+          // Lấy dữ liệu từ form
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const comments = document.getElementById("comments").value.trim();
+
+          // Lấy rating từ các ngôi sao
+          const ratingElements = document.querySelectorAll(".rating i");
+          let rating = 0;
+          ratingElements.forEach((star) => {
+            if (star.classList.contains("selected")) {
+              rating = Math.max(
+                rating,
+                parseInt(star.getAttribute("data-value"), 10)
+              );
+            }
+          });
+
+          // Kiểm tra dữ liệu đầu vào
+          if (!name) {
+            alert("Vui lòng nhập tên của bạn!");
+            return;
+          }
+          if (!email || !email.includes("@")) {
+            alert("Vui lòng nhập địa chỉ email hợp lệ!");
+            return;
+          }
+          if (!comments) {
+            alert("Vui lòng nhập nội dung bình luận!");
+            return;
+          }
+          if (rating === 0) {
+            alert("Vui lòng chọn xếp hạng!");
+            return;
+          }
+
+          // Dữ liệu gửi lên server
+          const feedbackData = {
+            bookingId: 1, // Thay bằng ID đặt chỗ cụ thể nếu cần
+            feedbackText: comments,
+            rating: rating,
+          };
+
+          // Xử lý trạng thái nút gửi
+          const submitButton = document.querySelector("button[type='submit']");
+          submitButton.disabled = true;
+          submitButton.innerText = "Đang gửi...";
+
+          try {
+            // Gửi request tới API
+            const response = await fetch("http://localhost:8080/feedback", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(feedbackData),
+            });
+
+            // Xử lý kết quả từ API
+            if (!response.ok) {
+              const errorData = await response.json();
+              alert(
+                "Lỗi: " +
+                  (Array.isArray(errorData) ? errorData.join(", ") : errorData)
+              );
+              return;
+            }
+
+            const result = await response.json();
+            alert("Đánh giá của bạn đã được gửi thành công!");
+            console.log(result);
+
+            // Reset form sau khi gửi thành công
+            document.getElementById("feedbackForm").reset();
+            ratingElements.forEach((star) => star.classList.remove("selected"));
+          } catch (error) {
+            console.error("Lỗi khi kết nối tới server:", error);
+            alert("Không thể gửi đánh giá. Vui lòng thử lại sau.");
+          } finally {
+            // Khôi phục trạng thái nút gửi
+            submitButton.disabled = false;
+            submitButton.innerText = "Gửi đánh giá";
+          }
+        });
+
+      // Xử lý hiệu ứng chọn sao (rating)
+      document.querySelectorAll(".rating i").forEach((star) => {
+        star.addEventListener("mouseover", function () {
+          // Đổi màu các sao khi rê chuột
+          const value = parseInt(this.getAttribute("data-value"), 10);
+          document.querySelectorAll(".rating i").forEach((s) => {
+            s.style.color =
+              parseInt(s.getAttribute("data-value"), 10) <= value
+                ? "#ffc107"
+                : "#ddd";
+          });
+        });
+
+        star.addEventListener("click", function () {
+          // Chọn sao khi click
+          const value = parseInt(this.getAttribute("data-value"), 10);
+          document.querySelectorAll(".rating i").forEach((s) => {
+            s.classList.remove("selected");
+            if (parseInt(s.getAttribute("data-value"), 10) <= value) {
+              s.classList.add("selected");
+            }
+          });
+        });
+
+        // Đặt lại màu khi chuột rời khỏi rating
+        star.addEventListener("mouseout", function () {
+          const selectedRating =
+            document.querySelectorAll(".rating i.selected").length;
+          document.querySelectorAll(".rating i").forEach((s) => {
+            s.style.color = s.classList.contains("selected")
+              ? "#ffc107"
+              : "#ddd";
+          });
         });
       });
     </script>
