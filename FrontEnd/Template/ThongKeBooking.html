@@ -36,20 +36,13 @@
       }
       .form-control:focus {
         box-shadow: none;
-        border-color: #007bff;
+        border-color: #004c9c;
       }
-      .text-center {
-        display: flex;
-        align-content: center;
-        justify-content: center;
+      .table button {
+        color: #f9f9f9;
       }
-      .btn-primary {
-        background-color: #0056b3;
-        border-color: #0056b3;
-      }
-      .btn-primary:hover {
-        background-color: #0d65c2;
-        border-color: #0d65c2;
+      .table button:hover {
+        text-decoration: none;
       }
       .note {
         color: red;
@@ -66,10 +59,11 @@
       }
       .table {
         margin-bottom: 20px; /* Khoảng cách giữa các bảng */
+        vertical-align: middle;
+        text-align: center;
       }
       .table-bordered thead th {
         color: #151515;
-        text-align: left;
       }
       .table-bordered thead td {
         color: #151515;
@@ -124,7 +118,7 @@
     <!-- form -->
     <div class="container mt-5">
       <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8" style="margin-bottom: 35px">
           <div class="booking-form">
             <h4>Thông tin người đặt phòng</h4>
             <table class="table table-bordered">
@@ -161,7 +155,8 @@
                 <tr>
                   <th>Loại phòng</th>
                   <th>Số lượng</th>
-                  <th>Giá</th>
+                  <th>Thành</th>
+                  <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
@@ -169,24 +164,29 @@
                   <td>Phòng gia đình</td>
                   <td>2</td>
                   <td>1.000.000</td>
+                  <td>
+                    <button type="submit" class="btn btn-primary">
+                      <b>Hủy</b>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <td>Phòng deluxe giường đôi</td>
                   <td>2</td>
                   <td>1.000.000</td>
+                  <td>
+                    <button type="submit" class="btn btn-primary">
+                      <b>Hủy</b>
+                    </button>
+                  </td>
                 </tr>
                 <tr>
                   <td><b>Tổng thanh toán</b></td>
-                  <td></td>
-                  <td><b>2.000.000</b></td>
+                  <td colspan="3"><b>2.000.000</b></td>
                 </tr>
               </tbody>
             </table>
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary w-50">
-                <b>Hủy đặt phòng</b>
-              </button>
-            </div>
+            <div class="text-center"></div>
           </div>
         </div>
       </div>
