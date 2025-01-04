@@ -26,6 +26,10 @@
             rel="stylesheet"
             type="text/css"
     />
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
     <link th:href="@{/Css/House.css}" rel="stylesheet"/>
     <link th:href="@{/Css/RoomDetail.css}" rel="stylesheet"/>
 </head>
@@ -47,11 +51,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <!-- <li class="nav-item">
-                  <a class="nav-link" href="#">
-                    <i class="fas fa-search"> </i> ICON TÌM KIẾM
-                  </a>
-                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/index}"> HOME </a>
                 </li>
@@ -91,6 +90,7 @@
         </div>
     </div>
 </nav>
+<!-- nội dung -->
 <div class="container" style="margin-top: 80px">
     <!-- tên + địa chỉ -->
     <div class="d-flex align-items-center">
@@ -440,7 +440,6 @@
             </div>
         </div>
     </div>
-
     <!-- thêm đánh giá -->
     <div class="mt-4">
         <button
@@ -522,94 +521,77 @@
     </div>
     <!-- end contact -->
     <!-- End -->
-    <!-- Modal chi tiết phòng-->
-    <div
-            class="modal fade"
-            id="roomModal"
-            tabindex="-1"
-            aria-labelledby="roomModalLabel"
-            aria-hidden="true"
-    >
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Nội dung từ FeedbackDetail.html sẽ được tải vào đây -->
-                    <iframe
-                            th:src="@{/RoomDetail}"
-                            style="width: 100%; height: 850px; border: none"
-                    ></iframe>
-                </div>
-            </div>
-        </div>
+</div>
+
+<!-- footer -->
+<div class="footer">
+    <div class="left">
+        <h5>TravelBooking</h5>
+        <p>Khám phá thế giới dễ dàng<br/>Đặt ngay trên TravelBooking</p>
     </div>
-    <!-- Modal đặt phòng-->
-    <div
-            class="modal fade"
-            id="bookingModal"
-            tabindex="-1"
-            aria-labelledby="bookingModalLabel"
-            aria-hidden="true"
-    >
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" style="color:#18528f">Đặt phòng trực tuyến</h5>
-                    <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Nội dung từ FeedbackDetail.html sẽ được tải vào đây -->
-                    <div
-                            th:insert="~{/FormBooking.html}"
-                    ></div>
-                </div>
-            </div>
-        </div>
+    <div class="right">
+        <h5>Nhóm 5</h5>
+        <p>Nguyễn Kiến Quốc<br/>Hà Ngọc Huy</p>
     </div>
-    <!-- Modal đánh giá-->
-    <div
-            class="modal fade"
-            id="feedbackModal"
-            tabindex="-1"
-            aria-labelledby="feedbackModalLabel"
-            aria-hidden="true"
-    >
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="position:absolute;">
-                <div class="modal-body">
-                    <div th:insert="~{/FormFeedback.html}"></div>
-                    <!--                    <div th:insert="~{/FeedbackDetail.html}"></div>-->
-                </div>
+</div>
+<!-- Modal đặt phòng-->
+<div
+        class="modal fade"
+        id="bookingModal"
+        tabindex="-1"
+        aria-labelledby="bookingModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="color:#18528f">Đặt phòng trực tuyến</h5>
+                <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                ></button>
             </div>
-        </div>
-    </div>
-    <!-- Modal đánh giá chi tiết-->
-    <div
-            class="modal fade"
-            id="feedbackDetailModal1"
-            tabindex="-1"
-            aria-labelledby="feedbackDetailModal1Label"
-            aria-hidden="true"
-    >
-        <div class="modal-dialog modal-lg">
-            <div th:insert="~{/FeedbackDetail.html}"></div>
+            <div class="modal-body">
+                <!-- Nội dung từ FeedbackDetail.html sẽ được tải vào đây -->
+                <div class="form-bk"
+                     th:insert="~{/FormBooking1.html}"
+                ></div>
+            </div>
         </div>
     </div>
 </div>
-
-<!-- nội dung -->
+<!-- Modal đánh giá-->
+<div
+        class="modal fade"
+        id="feedbackModal"
+        tabindex="-1"
+        aria-labelledby="feedbackModalLabel"
+        aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="fb-form"
+                     th:insert="~{/FormFeedback.html}"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal đánh giá chi tiết-->
+<div
+        class="modal fade"
+        id="feedbackDetailModal1"
+        tabindex="-1"
+        aria-labelledby="feedbackDetailModal1Label"
+        aria-hidden="true"
+>
+    <div class="modal-dialog modal-lg">
+        <div class="fb-detail"
+             th:insert="~{/FeedbackDetail.html}"></div>
+    </div>
+</div>
 <!-- modal full ảnh nhà -->
 <div
         class="modal fade"
@@ -658,51 +640,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- Modal 1 ảnh -->
-<div
-        class="modal fade"
-        id="housePhotoModal1"
-        tabindex="-1"
-        aria-labelledby="housePhotoModal1Label"
-        aria-hidden="true"
->
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button
-                        class="fas fa-arrow-left"
-                        data-bs-toggle="modal"
-                        data-bs-target="#housePhotoModal"
-                ></button>
-                <h6 class="hotel-titlee">Ruby Halong 6 Hotel</h6>
-                <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                ></button>
-            </div>
-            <div class="modal-body">
-                <!-- Nội dung từ FeedbackDetail.html sẽ được tải vào đây -->
-                <iframe
-                        th:src="@{/Photodetail}"
-                        style="width: 100%; height: 560px; border: none"
-                ></iframe>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- footer -->
-<div class="footer">
-    <div class="left">
-        <h5>TravelBooking</h5>
-        <p>Khám phá thế giới dễ dàng<br/>Đặt ngay trên TravelBooking</p>
-    </div>
-    <div class="right">
-        <h5>Nhóm 5</h5>
-        <p>Nguyễn Kiến Quốc<br/>Hà Ngọc Huy</p>
     </div>
 </div>
 
