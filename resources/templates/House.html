@@ -91,8 +91,6 @@
         </div>
     </div>
 </nav>
-
-<!-- nội dung -->
 <div class="container" style="margin-top: 80px">
     <!-- tên + địa chỉ -->
     <div class="d-flex align-items-center">
@@ -254,28 +252,6 @@
             </div>
         </div>
     </div>
-    <!-- tiện ích -->
-    <!-- <table class="mt-1">
-      <tbody>
-        <tr>
-          <td class="r-o">Size:</td>
-          <td>30 ft</td>
-        </tr>
-        <tr>
-          <td class="r-o">Capacity:</td>
-          <td>Max persion 5</td>
-        </tr>
-        <tr>
-          <td class="r-o">Bed:</td>
-          <td>King Beds</td>
-        </tr>
-        <tr>
-          <td class="r-o">Services:</td>
-          <td>Wifi, Television, Bathroom,...</td>
-        </tr>
-      </tbody>
-    </table> -->
-    <!-- mô tả phòng -->
     <p
             class="mt-5"
             style="
@@ -546,36 +522,6 @@
     </div>
     <!-- end contact -->
     <!-- End -->
-
-    <!-- hiển thi khi ấn nút tìm hiểu thêm -->
-    <div
-            class="modal fade"
-            id="feedbackDetailModal"
-            tabindex="-1"
-            aria-labelledby="feedbackDetailModalLabel"
-            aria-hidden="true"
-    >
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                    ></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Nội dung từ FeedbackDetail.html sẽ được tải vào đây -->
-                    <iframe
-                            th:src="@{/FeedbackDetail}"
-                            style="width: 100%; height: 400px; border: none"
-                    ></iframe>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal chi tiết phòng-->
     <div
             class="modal fade"
@@ -662,6 +608,8 @@
         </div>
     </div>
 </div>
+
+<!-- nội dung -->
 <!-- modal full ảnh nhà -->
 <div
         class="modal fade"
@@ -766,30 +714,5 @@
         type="text/javascript"
 ></script>
 <script th:src="@{/Js/Slick_slider.js}" type="text/javascript"></script>
-<script>
-    $(document).ready(function () {
-      // Khi nút "Gửi đánh giá" được nhấn
-      $("#submitFeedback").on("click", function () {
-        // Ẩn modal feedback
-        $("#feedbackModal").modal("hide");
-        // Hiện modal feedbackDetail
-        $("#feedbackDetailModal1").modal("show");
-      });
-    });
-</script>
-<!--    <script>-->
-<!--      // Mở modal và tải nội dung từ /FormFeedback vào trong modalContent-->
-<!--      $('#feedbackModal').on('show.bs.modal', function (e) {-->
-<!--          fetch('/FormFeedback1')-->
-<!--              .then(response => response.text())  // Lấy nội dung HTML của trang FormFeedback-->
-<!--              .then(data => {-->
-<!--                  document.getElementById('modalContent').innerHTML = data;  // Chèn nội dung vào modal-->
-<!--              })-->
-<!--              .catch(error => {-->
-<!--                  console.error("Error loading FormFeedback:", error);-->
-<!--                  document.getElementById('modalContent').innerHTML = "<p>Không thể tải nội dung.</p>";  // Hiển thị lỗi nếu có-->
-<!--              });-->
-<!--      });-->
-<!--    </script>-->
 </body>
 </html>
