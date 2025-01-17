@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Chi Tiết Phòng </title>
+    <link
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+<!--    <link th:href="@{/Css/House.css}" rel="stylesheet"/>-->
+    <link th:href="@{/Css/RoomDetail.css}" rel="stylesheet"/>
+
+</head>
+<body>
+
+<div class="container mt-5">
+    <form th:action="@{/room}" method="get" th:object="${roomDetail}">
+        <div class="row">
+            <div class="col-md-8">
+                <div id="roomCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner room-image">
+                        <div class="carousel-item"
+                             th:classappend="${imageStat.index == 0} ? 'active'"
+                             th:each="image, imageStat: ${roomDetail.roomImages}"
+                        >
+                            <img
+                                    th:src="${image.largeUrl}"
+                                    class="d-block w-100"
+                                    alt="Room Image"
+                            />
+                        </div>
+                        <!-- Thêm các ảnh khác vào đây -->
+                    </div>
+                    <a
+                            class="carousel-control-prev"
+                            href="#roomCarousel"
+                            role="button"
+                            data-slide="prev"
+                    >
+                <span
+                        class="carousel-control-prev-icon"
+                        aria-hidden="true"
+                ></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a
+                            class="carousel-control-next"
+                            href="#roomCarousel"
+                            role="button"
+                            data-slide="next"
+                    >
+                <span
+                        class="carousel-control-next-icon"
+                        aria-hidden="true"
+                ></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+                <div class="thumbnail-container d-flex justify-content-center mt-3">
+                    <img
+                            th:each="image, imageStat : ${roomDetail.roomImages}"
+                            th:src="${image.largeUrl}"
+                            class="thumbnail"
+                            data-target="#roomCarousel"
+                            data-slide-to="${imageStat.index}"
+                            alt="Thumbnail"
+                    />
+                    <!--              <p th:text="${image.largeUrl}"></p>-->
+                    <!--              <img-->
+                    <!--                src="https://storage.googleapis.com/a1aa/image/xEWUjwqfItSxSirx7HjA8rDfnHtCgzGr0ZEuJe7bNoTj5uznA.jpg"-->
+                    <!--                class="thumbnail"-->
+                    <!--                data-target="#roomCarousel"-->
+                    <!--                data-slide-to="1"-->
+                    <!--                alt="Thumbnail"-->
+                    <!--              />-->
+                    <!--              <img-->
+                    <!--                src="https://storage.googleapis.com/a1aa/image/fMoHlHlhRZQ2PiuGitg9YUuPTuycW1Kzb3qo6TyXPIdzXB9JA.jpg"-->
+                    <!--                class="thumbnail"-->
+                    <!--                data-target="#roomCarousel"-->
+                    <!--                data-slide-to="2"-->
+                    <!--                alt="Thumbnail"-->
+                    <!--              />-->
+                    <!--              &lt;!&ndash; them &ndash;&gt;-->
+                    <!-- them -->
+                    <!-- Thêm các ảnh khác vào đây -->
+                </div>
+            </div>
+
+            <div class="col-md-4 room-details">
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+<!--                TÊN PHÒNG-->
+                <h3 th:text="${roomDetail.roomName}"></h3>
+
+<!--                KÍCH THƯỚC-->
+                <p><b>Kích thước phòng: </b><span th:text="${roomDetail.size}"></span> m²</p>
+
+                <!--MÔ TẢ-->
+                <p th:text="${roomDetail.description}"></p>
+
+                <!--Tiện ích phòng-->
+                <div  th:each="facilities : ${roomDetail.facilities}">
+                    <!-- TÊN LOẠI tiện ích-->
+                    <p><b th:text="${facilities.name}"></b></p>
+
+                    <!-- Danh sách tiện ích-->
+                    <div class="row ">
+<!--                        // nửa đầu-->
+                        <div class="col-6" th:each="index : ${#numbers.sequence(0, (facilities.roomFacilityDetailList.size() / 2) - 1)}">
+                            <ul class="list-unstyled">
+                                <li>&#10003; <span th:text="${facilities.roomFacilityDetailList[index].name}"></span></li>
+                            </ul>
+                        </div>
+<!--                        nửa sau-->
+                        <div class="col-6" th:each="index : ${#numbers.sequence(facilities.roomFacilityDetailList.size() / 2, facilities.roomFacilityDetailList.size() - 1)}">
+                            <ul class="list-unstyled">
+                                <li>&#10003; <span th:text="${facilities.roomFacilityDetailList[index].name}"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $("#roomCarousel").on("slide.bs.carousel", function (e) {
+      var index = $(e.relatedTarget).index();
+      $(".thumbnail").removeClass("active");
+      $(".thumbnail").eq(index).addClass("active");
+    });
+</script>
+</body>
+</html>

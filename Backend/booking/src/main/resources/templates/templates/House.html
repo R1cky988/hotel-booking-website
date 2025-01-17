@@ -1,0 +1,605 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="vi">
+<head>
+    <meta charset="utf-8"/>
+    <title th:text="${hotel.name}"></title>
+    <link
+            crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link
+            href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"
+            rel="stylesheet"
+            type="text/css"
+    />
+    <link th:href="@{/Css/House.css}" rel="stylesheet"/>
+    <link th:href="@{/Css/RoomDetail.css}" rel="stylesheet"/>
+</head>
+<body>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container-fluid" style="max-height: 30px">
+        <a class="navbar-brand" th:href="@{/index}"> TravelBooking </a>
+        <button
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarNav"
+                data-bs-toggle="collapse"
+                type="button"
+        >
+            <span class="navbar-toggler-icon"> </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <i class="fas fa-search"> </i> ICON TÌM KIẾM
+                  </a>
+                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index}"> HOME </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index#popular}"> POPULAR </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index#explore}"> EXPLORE </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/index#review}"> REVIEW </a>
+                </li>
+                <div class="vertical-line1"></div>
+
+                <div th:if="${session.user != null}" class="user-info d-flex">
+
+                    <a class="nav-link" style="color: #fff; text-decoration: none;"
+                       th:href="@{http://localhost:8088/booking/{userId}(userId=${session.user.id})}"
+                    >
+                        <span th:text="${session.user.firstName}"></span>
+                        <span th:text="${session.user.lastName}"></span>
+                    </a>
+
+                    <li class="nav-item">
+                        <a
+                                class="nav-link"
+                                href="/users/logout"
+                                style="color: #ffffff"
+                                onmouseover="this.style.color='433e3e'"
+                                onmouseout="this.style.color='#ff3b3f'"
+                        >
+                            SIGN OUT
+                        </a>
+                    </li>
+                </div>
+
+                <div th:if="${session.user == null}" class="login-form d-flex">
+                    <li class="nav-item">
+                        <a
+                                class="nav-link"
+                                href="/users/login"
+                                style="color: #f9f9f9"
+                                onmouseover="this.style.color='433e3e'"
+                                onmouseout="this.style.color='#ff3b3f'"
+                        >
+                            SIGN IN
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a
+                                class="nav-link"
+                                href="/users/register"
+                                style="color: #ffffff"
+                                onmouseover="this.style.color='433e3e'"
+                                onmouseout="this.style.color='#ff3b3f'"
+                        >
+                            SIGN UP
+                        </a>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- nội dung -->
+<div class="container" style="margin-top: 80px">
+    <form th:if="${hotel != null}" th:action="@{/hotel/{hotelId}(hotelId=${hotel.id})}" method="get"
+          th:object="${hotel}">
+        <!-- tên + địa chỉ -->
+        <div class="d-flex align-items-center">
+            <div>
+                <h1 class="hotel-title" th:text="${hotel.name}"></h1>
+                <p class="hotel-address">
+                    <a class="fas fa-map-marker-alt" style="font-size: 20px"></a>
+                    <a class="aa" href="#linkmap" th:text="${hotel.address.full}">
+                    </a
+                    >
+                </p>
+            </div>
+        </div>
+        <!-- ảnh phòng + check avail -->
+        <div class="row gallery">
+            <!-- ảnh -->
+            <div class="col-9">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div
+                                    class="col-12 mb-2"
+                                    style="overflow: hidden; border-radius: 8px"
+                            >
+                                <a
+                                        href="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#housePhotoModal"
+                                >
+                                    <img
+                                            alt="Three beds in a hotel room with green curtains and paintings on the wall"
+                                            class="main2-img"
+                                            height="300"
+                                            src="https://storage.googleapis.com/a1aa/image/FDX2zQtfCaxNAy5wRi1VUu1KtyjMFpJFE4CKkavwfOfUfKoPB.jpg"
+                                            width="400"
+                                    />
+                                </a>
+                            </div>
+                            <div
+                                    class="col-12 mb-2"
+                                    style="overflow: hidden; border-radius: 8px"
+                            >
+                                <a
+                                        href="#"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#housePhotoModal"
+                                >
+                                    <img
+                                            alt="Three beds in a hotel room with green curtains and paintings on the wall"
+                                            class="main2-img"
+                                            height="300"
+                                            src="https://storage.googleapis.com/a1aa/image/FDX2zQtfCaxNAy5wRi1VUu1KtyjMFpJFE4CKkavwfOfUfKoPB.jpg"
+                                            width="400"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ảnh chính -->
+                    <div
+                            class="col-8 mb-2"
+                            style="overflow: hidden; border-radius: 8px"
+                    >
+                        <a
+                                href="#"
+                                data-bs-toggle="modal"
+                                data-bs-target="#housePhotoModal"
+                        >
+                            <img
+                                    alt="Main view of the city with buildings and a clear sky"
+                                    class="main-img"
+                                    th:src="${hotel.image}"
+                                    height="600"
+                                    width="800"
+                            />
+                        </a>
+                    </div>
+
+                    <!-- ảnh con -->
+                    <div
+                            class="col-md-3 col-4 mt-2"
+                            th:each="image, iterStat : ${hotel.images}"
+                            th:if="${iterStat.index < 3}"
+                    >
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#housePhotoModal">
+                            <img
+                                    alt="Hotel image"
+                                    class="img-fluid small-img"
+                                    th:src="${image.imageUrl}"
+                            />
+                        </a>
+                    </div>
+
+                    <!-- Additional Images Overlay -->
+                    <div class="col-md-3 col-4 mt-2" th:if="${hotel.images.size() > 3}">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#housePhotoModal">
+                            <img
+                                    alt="More images"
+                                    class="img-fluid small-img"
+                                    th:src="${hotel.images[3].imageUrl}"
+                            />
+
+                        </a>
+                    </div>
+
+                    <div class="col-md-3 col-4 mt-2">
+                        <a
+                                class="more-img"
+                                href="#"
+                                data-bs-toggle="modal"
+                                data-bs-target="#housePhotoModal"
+                        >
+                            <div class="overlay-text">
+                                +<span th:text="${hotel.images.size() - 3}"></span> ảnh
+                            </div>
+                            <!--                            <div class="overlay-text">+10 ảnh</div>-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- form check phòng trống-->
+            <div class="col-md-3">
+                <div class="room-booking"
+                     style="background-color: rgb(245, 245, 245);
+                            padding:20px 15px;
+                            border-radius: 8px;
+                            transform: translate(0, 15px)">
+                    <h4 style="color: rgba(21, 89, 237, 0.6)">Your Reservation</h4>
+                    <form th:action="@{/hotel/{hotelId}(hotelId=${hotel.id})}" method="get">
+                        <div th:if="${error}" class="alert alert-danger">
+                            <p th:text="${error}"></p>
+                        </div>
+                        <div class="check"
+                             style="position: relative;
+                                    margin-bottom: 15px;
+                                    color: rgba(95, 126, 193, 0.4);">
+                            <label for="date-in"
+                                   style="font-size: 14px;
+                                          color: rgba(21, 89, 237, 0.4);
+                                          display: block;
+                                          font-weight: 500;
+                                          margin-bottom: 10px;">
+                                Check In:</label>
+                            <input type="date"
+                                   style="width: 100%;
+                                            height: 35px;
+                                            border: 1px solid rgba(21, 89, 237, 0.4);
+                                            border-radius: 6px;
+                                            font-size: 14px;
+                                            color: rgba(21, 89, 237, 0.4);
+                                            padding-left: 5px;
+                                            outline: none;"
+                                   class="date-input" id="date-in" name="checkIn" th:value="${checkIn}"
+                                   required/>
+                        </div>
+                        <div class="check"
+                             style="position: relative;
+                                    color: rgba(95, 126, 193, 0.4);
+                                    margin-bottom: 15px;">
+                            <label for="date-out"
+                                   style="font-size: 14px;
+                                          color: rgba(21, 89, 237, 0.4);
+                                          display: block;
+                                          font-weight: 500;
+                                          margin-bottom: 10px;"
+                            >Check Out:</label>
+                            <input type="date"
+                                   style="width: 100%;
+                                            height: 35px;
+                                            border: 1px solid rgba(21, 89, 237, 0.4);
+                                            border-radius: 6px;
+                                            font-size: 14px;
+                                            color: rgba(21, 89, 237, 0.4);
+                                            padding-left: 5px;
+                                            outline: none;"
+                                   class="date-input" id="date-out" name="checkOut" th:value="${checkOut}"
+                                   required/>
+                        </div>
+                        <button type="submit"
+                                style="display: block;
+                                font-size: 14px;
+                                text-transform: uppercase;
+                                border: 2px solid rgba(21, 89, 237, 0.1);
+                                border-radius: 6px;
+                                color: rgba(21, 89, 237, 0.4);
+                                font-weight: 500;
+                                background: transparent;
+                                width: 100%;
+                                height: 46px;
+                                margin-top: 30px;">
+                            Check Availability
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <p
+                class="mt-5"
+                style="
+              text-align: justify;
+              text-justify: inter-word;
+              margin-bottom: 35px;
+              color: rgb(125, 125, 125);
+            "
+                th:text="${hotel.description}"
+        >
+        </p>
+        <hr/>
+        <br/>
+        <h2>Phòng trống</h2>
+        <br/>
+        <!-- bảng phòng(default) -->
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="col-4">Loại phòng</th>
+                <th class="col-1">Số lượng khách</th>
+                <th class="col-4">Giá cho 1 đêm</th>
+                <th class="col-1">Chọn phòng</th>
+                <th class="col-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="roomDetail : ${roomDetailResponse}">
+                <td>
+                    <button
+
+                            th:text="${roomDetail.roomName}"
+                            th:onclick="'window.location.href=\'/room?hotelId=' + ${hotel.id} + '&roomId=' + ${roomDetail.id} + '\''">
+                        <br/>
+                    </button>
+                    <!--                    data-bs-toggle="modal"-->
+                    <!--                    data-bs-target="#roomModal"-->
+                </td>
+                <td>
+                    <span th:text="${roomDetail.persons} + ' người'"></span><br/></td>
+                <td>
+                    <span class="text-primary" th:text="${roomDetail.pricePerNight}"></span><br/>
+                    <small class="text-muted">Đã bao gồm thuế và phí</small><br/>
+                    <span class="badge bg-primary"
+                    >Ưu đãi Trong Thời Gian Có Hạn</span>
+<!--                    <div th:if="${roomDetail.available == 0}" class="alert alert-danger mt-2" role="alert">-->
+<!--                        Hết phòng!-->
+<!--                    </div>-->
+                </td>
+                <!-- số lượng căn  -->
+                <td>
+                    <select class="form-select" th:id="'numberOfRoomsSelect-' + ${roomDetail.id}"
+                            aria-label="Default select example">
+                        <!--                        <option selected>0</option>-->
+                        <option th:each="i : ${#numbers.sequence(0, roomDetail.available)}"
+                                th:value="${i}" th:text="${i}"></option>
+
+                    </select>
+                </td>
+                <!-- nút đặt phòng -->
+                <input
+                        type="hidden"
+                        id="availabilityChecked"
+                        th:value="${availabilityChecked}"
+                />
+                <td>
+                    <a
+                            class="btn btn-primary w-100"
+                            style="color: #ebf1f7; font-weight: 700; text-align: center"
+                            th:onclick="|validateBooking(${roomDetail.id})|"
+                    >
+                        Đặt phòng
+                    </a>
+                </td>
+            </tr>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- đánh giá-->
+
+        <h2 style="margin-left: 7px; margin-top: 50px">Đánh giá của khách</h2>
+        <div th:if="${#lists.size(feedbackDetails) == 0}" class="alert alert-danger mt-2" role="alert">
+            Không có đánh giá nào!
+        </div>
+        <div th:if="${#lists.size(feedbackDetails) > 0}" class="slick-slider">
+            <div th:each="feedback : ${feedbackDetails}">
+                <div class="review-card">
+                    <img
+                            alt="Portrait of Tom Leakar"
+                            height="80"
+                            src="https://img.freepik.com/vector-premium/icono-perfil-avatar-predeterminado-imagen-usuario-redes-sociales-icono-avatar-gris-silueta-perfil-blanco-ilustracion-vectorial_561158-3485.jpg"
+                            width="80"
+                    />
+
+                    <h5 th:text="${feedback.name}"></h5>
+                    <p th:text="${feedback.roomName}" style="margin-bottom:0"></p>
+                    <div >
+                        <!-- Hiển thị sao đầy đủ dựa trên rate -->
+                        <i class="fas fa-star" th:each="n : ${#numbers.sequence(1, 5)}"
+                           th:classappend="${n <= feedback.rate} ? 'stars' : 'stars1'"></i>
+                    </div>
+                    <p style="margin-top:9px"><span th:text="${feedback.comment}"></span></p>
+                    <a href="#"
+                       class="read-more"
+                       data-bs-toggle="modal"
+                       data-bs-target="#feedbackDetailModal"
+                       th:attr="data-feedback-id=${feedback.id},
+                            data-feedback-name=${feedback.name != null ? feedback.name : 'N/A'},
+                            data-feedback-roomname=${feedback.roomName != null ? feedback.roomName : 'N/A'},
+                            data-feedback-rate=${feedback.rate != null ? feedback.rate : 0},
+                            data-feedback-comment=${feedback.comment != null ? feedback.comment : 'No comment'}">
+                        Tìm hiểu thêm
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- thêm đánh giá -->
+        <div class="mt-4">
+            <button
+                    class="btn-read-all"
+                    th:onclick="'window.location.href=\'/feedback?hotelId=' + ${hotel.id} + '\''"
+            >
+                <!--                data-bs-toggle="modal"-->
+                <!--                data-bs-target="#feedbackModal"-->
+                Thêm đánh giá của bạn
+            </button>
+        </div>
+        <!--  contact -->
+        <div class="contact">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="titlepage">
+                            <h2>Contact Us</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <form id="request" class="main_form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input
+                                            class="contactus"
+                                            placeholder="Name"
+                                            type="type"
+                                            name="Name"
+                                    />
+                                </div>
+                                <div class="col-md-12">
+                                    <input
+                                            class="contactus"
+                                            placeholder="Email"
+                                            type="type"
+                                            name="Email"
+                                    />
+                                </div>
+                                <div class="col-md-12">
+                                    <input
+                                            class="contactus"
+                                            placeholder="Phone Number"
+                                            type="type"
+                                            name="Phone Number"
+                                    />
+                                </div>
+                                <div class="col-md-12">
+                        <textarea
+                                class="textarea"
+                                placeholder="Message"
+                                type="type"
+                                Message="Name"
+                        ></textarea>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="send_btn">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="map_main">
+                            <div class="map-responsive" id="linkmap">
+                                <iframe
+                                        th:src="|https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=${hotel.latitude},${hotel.longitude}|"
+                                        width="600"
+                                        height="400"
+                                        frameborder="0"
+                                        style="border: 0; width: 100%"
+                                        allowfullscreen=""
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end contact -->
+        <!-- End -->
+    </form>
+    <p th:if="${hotel == null}">Khách sạn không tồn tại.</p>
+</div>
+<div class="modal fade" id="feedbackDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Nội dung chi tiết sẽ được chèn vào đây -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="left">
+        <h5>TravelBooking</h5>
+        <p>Khám phá thế giới dễ dàng<br/>Đặt ngay trên TravelBooking</p>
+    </div>
+    <div class="right">
+        <h5>Nhóm 5</h5>
+        <p>Nguyễn Kiến Quốc<br/>Hà Ngọc Huy</p>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+        type="text/javascript"
+></script>
+<script th:src="@{/Js/Slick_slider.js}" type="text/javascript"></script>
+
+<script>
+    function setNumberOfRoom(roomId, selectId) {
+
+    var numberOfRooms = document.getElementById(selectId).value;
+
+    console.log('Room ID:', roomId, 'Selected number of rooms:', numberOfRooms);
+
+    localStorage.setItem('numberOfRoom', numberOfRooms);
+
+    var href = '/booking/room/' + roomId + '?numberOfRoom=' + numberOfRooms;
+
+    window.location.href = href;
+}
+</script>
+<script>
+    function validateBooking(roomId) {
+        const availabilityChecked = document.getElementById('availabilityChecked').value === 'true';
+        if (!availabilityChecked) {
+            alert('Bạn phải kiểm tra tình trạng phòng trước khi đặt.');
+            return false;
+        }
+        setNumberOfRoom(roomId, 'numberOfRoomsSelect-' + roomId);
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const feedbackModal = document.getElementById("feedbackDetailModal");
+
+        feedbackModal.addEventListener("show.bs.modal", function (event) {
+            // Lấy thông tin từ nút "Tìm hiểu thêm"
+            const button = event.relatedTarget; // Nút kích hoạt modal
+            const feedbackId = button.getAttribute("data-feedback-id");
+            const feedbackName = button.getAttribute("data-feedback-name");
+            const feedbackroomName = button.getAttribute("data-feedback-roomname");
+            const feedbackRate = button.getAttribute("data-feedback-rate");
+            const feedbackComment = button.getAttribute("data-feedback-comment");
+
+            // Cập nhật nội dung modal
+            const modalTitle = feedbackModal.querySelector(".modal-title");
+            const modalBody = feedbackModal.querySelector(".modal-body");
+
+            modalTitle.textContent = `Chi tiết đánh giá của ${feedbackName}`;
+            modalBody.innerHTML = `
+                <p><strong>Room:</strong> ${feedbackroomName}</p>
+                <p><strong>Rate:</strong> ${feedbackRate}</p>
+                <p><strong>Comment:</strong> ${feedbackComment}</p>
+            `;
+        });
+    });
+</script>
+</body>
+</html>
