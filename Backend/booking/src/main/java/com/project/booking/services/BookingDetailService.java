@@ -12,6 +12,10 @@ import com.project.booking.response.BookingResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class BookingDetailService {
@@ -28,9 +32,14 @@ public class BookingDetailService {
         if(existingRoom.getAvailable() <= 0){
             throw new DataNotFoundException("Room is not available");
         }
+        if(bookingDetailDTO.getCheckIn().isBefore(LocalDate.now())
+        ||bookingDetailDTO.getCheckOut().isBefore(LocalDate.now())){
+            throw new Exception("Ngày đặt phải sau ngày hiện tại");
+        }
         if(bookingDetailDTO.getCheckOut().isBefore(bookingDetailDTO.getCheckIn())){
             throw new Exception("Ngày nhận phòng phải trước ngày trả phòng");
         }
+
         BookingDetail newForm = BookingDetail.builder()
                 .userId(existingUser)
                 .roomId(existingRoom)
@@ -57,9 +66,22 @@ public class BookingDetailService {
 
     public void deleteBookingForm(Long formId){
         BookingDetail bookingDetail = bookingDetailRepository.findById(formId)
-                .orElseThrow(()-> new DataNotFoundException("Cannot find form"));
+                .orElseThrow(()-> new DataNotFoundException("{\"message\": \"Cannot find form\"}"));
         bookingDetail.getRoomId().setAvailable(bookingDetail.getRoomId().getAvailable() + bookingDetail.getNumberOfRoom());
         bookingDetailRepository.deleteById(formId);
+    }
+
+    public List<BookingResponse> getAllBookingOfUser(Long userId){
+        List<BookingDetail> bookingDetailList = bookingDetailRepository.getAllBookingOfUser(userId);
+        List<BookingResponse> bookingResponseList = new ArrayList<>();
+        for(BookingDetail bookingDetail : bookingDetailList){
+            Long totalDate = bookingDetailRepository.getDateDiffById(bookingDetail.getId());
+            Long totalPrice = totalDate * bookingDetail.getRoomId().getPricePerNight() * bookingDetail.getNumberOfRoom();
+
+            BookingResponse bookingResponse = BookingResponse.fromBooking(bookingDetail, totalPrice);
+            bookingResponseList.add(bookingResponse);
+        }
+        return bookingResponseList;
     }
 
 

@@ -8,11 +8,18 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 
 @Repository
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
-
     Page<Hotel> findAll(Pageable pageable);
+    @Query("SELECT h FROM Hotel h WHERE " +
+            "(:type IS NULL OR h.type LIKE %:type%) AND " +
+            "(:region IS NULL OR h.address.region LIKE %:region%) AND " +
+            "(:hotelName IS NULL OR h.name LIKE %:hotelName%)")
+    List<Hotel> searchHotels(@Param("type") String type,
+                             @Param("region") String region,
+                             @Param("hotelName") String hotelName);
 }

@@ -3,10 +3,7 @@ package com.project.booking.services;
 import com.project.booking.dtos.*;
 import com.project.booking.exceptions.DataNotFoundException;
 import com.project.booking.models.*;
-import com.project.booking.repositories.HotelRepository;
-import com.project.booking.repositories.RoomDetailRepository;
-import com.project.booking.repositories.RoomFacilityDetailRepository;
-import com.project.booking.repositories.RoomFacilityRepository;
+import com.project.booking.repositories.*;
 import com.project.booking.response.ListRoomDetailResponse;
 import com.project.booking.response.RoomDetailResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +19,7 @@ public class RoomDetailService {
     private final RoomDetailRepository roomDetailRepository;
     private final RoomFacilityRepository roomFacilityRepository;
     private final RoomFacilityDetailRepository roomFacilityDetailRepository;
+    private final RoomImageRepository roomImageRepository;
 
     public RoomDetail createRoom(RoomDetailDTO roomDetailDTO){
         Hotel existingHotel = hotelRepository.findById(roomDetailDTO.getHotelId())
@@ -36,6 +34,8 @@ public class RoomDetailService {
                 .checkOut(roomDetailDTO.getCheckOut())
                 .pricePerNight(roomDetailDTO.getPricePerNight())
                 .hotel(existingHotel)
+                .description(roomDetailDTO.getDescription())
+                .size(roomDetailDTO.getSize())
                 .build();
          roomDetailRepository.save(newRoom);
 
@@ -59,16 +59,6 @@ public class RoomDetailService {
         return newRoom;
     }
 
-    public ListRoomDetailResponse getAllRoomOfPlace(Long hotelId){
-        List<RoomDetailResponse> roomDetailResponses = roomDetailRepository.findAllRoomInPlace(hotelId).stream()
-                .map(RoomDetailResponse::fromRoomDetail).toList();
-                //.orElseThrow(()->new DataNotFoundException("Cannot find place"));
-        return ListRoomDetailResponse.builder()
-                .roomDetailResponseList(roomDetailResponses)
-                .build();
-
-    }
-
     public List<RoomDetail> getAvailableRooms(Long hotelId, Date checkInDate, Date checkOutDate) {
         return roomDetailRepository.findAvailableRooms(hotelId, checkInDate, checkOutDate);
     }
@@ -78,4 +68,9 @@ public class RoomDetailService {
                 .orElseThrow(()-> new DataNotFoundException("Cannot find the hotel you need"));
         return roomDetail;
     }
+
+    public List<String> getRoomImage(Long roomId){
+        return roomImageRepository.getRoomImage(roomId);
+    }
+
 }

@@ -5,8 +5,10 @@ import com.project.booking.models.BookingDetail;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -40,14 +42,16 @@ public class BookingResponse {
     private String specialRequest;
 
     @JsonProperty("total_price")
-    private Long totalPrice;
+    private String totalPrice;
 
     private Long totalRoom;
 
     private String roomName;
 
+    static NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
     public static BookingResponse fromBooking(BookingDetail bookingDetail, Long totalPrice){
-        return BookingResponse.builder()
+        BookingResponse bookingRespone =  BookingResponse.builder()
                 .id(bookingDetail.getId())
                 .userId(bookingDetail.getUserId().getId())
                 .roomId(bookingDetail.getRoomId().getRoomName())
@@ -59,8 +63,8 @@ public class BookingResponse {
                 .specialRequest(bookingDetail.getSpecialRequest())
                 .roomName(bookingDetail.getRoomName())
                 .totalRoom(bookingDetail.getNumberOfRoom())
-                .totalPrice(totalPrice)
                 .build();
-         //bookingResponse;
+        bookingRespone.setTotalPrice(formatter.format(totalPrice));
+        return bookingRespone;
     }
 }

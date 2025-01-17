@@ -46,4 +46,5 @@ public class BookingDetailDTO {
 
     private Long requireRoom;
 
+
 }

@@ -1,5 +1,6 @@
 package com.project.booking.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class RoomImage {
 
         @ManyToOne
         @JoinColumn(name = "room_id")
+        @JsonBackReference
         private RoomDetail roomDetail;
 
         @PrePersist

@@ -3,6 +3,7 @@ package com.project.booking.response;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.project.booking.models.FeedbackDetail;
 import com.project.booking.models.FeedbackSummary;
+import com.project.booking.models.Hotel;
 import com.project.booking.models.Users;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,14 +29,18 @@ public class FeedbackDetailResponse {
 
     private int rate;
 
+    private String email;
+
     private LocalDate createTime;
 
-
+    private String roomName;
     public static FeedbackDetailResponse fromDetail(FeedbackDetail feedbackDetail){
         FeedbackDetailResponse feedbackDetailResponse = FeedbackDetailResponse.builder()
                 .id(feedbackDetail.getId())
-                .room(feedbackDetail.getRoom().getRoomName())
+                .room(feedbackDetail.getRoomName())
+                .roomName(feedbackDetail.getRoomName())
                 .name(feedbackDetail.getName())
+                .email(feedbackDetail.getEmail())
                 .userId(feedbackDetail.getUserId().getId())
                 .comment(feedbackDetail.getComment())
                 .rate(feedbackDetail.getRate())

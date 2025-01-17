@@ -40,6 +40,11 @@ public class RoomDetailDTO {
 
     @JsonProperty("hotel_id")
     private Long hotelId;
+
+    private String description;
+
+    private Long size;
+
     @JsonProperty("facilities")
     private List<RoomFacilityDTO> facilityDTO;
 

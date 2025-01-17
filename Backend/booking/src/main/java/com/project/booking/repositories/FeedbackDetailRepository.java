@@ -8,11 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface FeedbackDetailRepository extends JpaRepository<FeedbackDetail, Long> {
 
     @Query("SELECT fd FROM FeedbackDetail fd WHERE fd.feedbackSummary.id = :feedbackSummaryId")
-    Optional<FeedbackDetail> findAllFeedbackOfSummary(@Param("feedbackSummaryId") Long feedbackSummaryId);
+    List<FeedbackDetail> findAllFeedbackOfSummary(@Param("feedbackSummaryId") Long feedbackSummaryId);
+    @Query("SELECT f FROM FeedbackDetail f")
+    List<FeedbackDetail> findAllFeedbackDetails();
 }

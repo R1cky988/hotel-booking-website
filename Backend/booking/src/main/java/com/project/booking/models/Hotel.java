@@ -41,5 +41,9 @@ public class Hotel extends Time{
     @JsonManagedReference
     private List<HotelFacility> facilities;
 
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<RoomDetail> roomDetails;
+
 
 }

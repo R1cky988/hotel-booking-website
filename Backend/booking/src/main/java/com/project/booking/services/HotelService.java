@@ -6,11 +6,17 @@ import com.project.booking.dtos.HotelDTO;
 import com.project.booking.exceptions.DataNotFoundException;
 import com.project.booking.models.*;
 import com.project.booking.repositories.*;
+import com.project.booking.response.RoomDetailResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +26,7 @@ public class HotelService {
     private final HotelFacilityDetailRepository hotelFacilityDetailRepository;
     private final HotelFacilityRepository hotelFacilityRepository;
     private final HotelImageRepository hotelImageRepository;
+    private final RoomDetailRepository roomDetailRepository;
 
     public Hotel addPlace(HotelDTO hotelDTO) {
         Hotel newHotel = Hotel.builder()
@@ -70,11 +77,10 @@ public class HotelService {
     }
 
     public Hotel getHotelById(Long hotelId){
-        Hotel hotel =  hotelRepository.findById(hotelId)
-                .orElseThrow(()-> new DataNotFoundException("Cannot find the hotel you need"));
         //List<HotelFacility> hotelFacilityList = hotelFacilityRepository.findHotelById(hotelId);
                 //.orElseThrow(()->new DataNotFoundException("Cannot find hotel"));
-        return hotel;
+        return hotelRepository.findById(hotelId)
+                .orElseThrow(()-> new DataNotFoundException("Cannot find the hotel you need"));
     }
 
     public Hotel updateThumbnail(Long hotelId, HotelDTO hotelDTO){
@@ -94,5 +100,39 @@ public class HotelService {
 
     public List<HotelFacility> getHotelFacility(Long hotelId){
         return hotelFacilityRepository.findHotelById(hotelId);
+    }
+
+    public List<RoomDetailResponse> getRoomDetailResponse(Long hotelId){
+        List<RoomDetail> roomDetails = roomDetailRepository.findRoomByHotelId(hotelId);
+        List<RoomDetailResponse> roomDetailResponseList = new ArrayList<>();
+        for(RoomDetail roomDetail : roomDetails){
+            RoomDetailResponse roomDetailResponse = RoomDetailResponse.fromRoomDetail(roomDetail);
+            roomDetailResponseList.add(roomDetailResponse);
+        }
+        return roomDetailResponseList;
+    }
+
+    public List<RoomDetailResponse> getRoomAvailable(Long hotelId, String checkInStr, String checkOutStr) throws Exception {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date checkIn = formatter.parse(checkInStr);
+        Date checkOut = formatter.parse(checkOutStr);
+
+        List<RoomDetail> roomDetails = roomDetailRepository.findAvailableRooms(hotelId, checkIn, checkOut);
+        List<RoomDetailResponse> roomDetailResponseList = new ArrayList<>();
+
+        for (RoomDetail roomDetail : roomDetails) {
+                RoomDetailResponse roomDetailResponse = RoomDetailResponse.fromRoomDetail(roomDetail);
+                roomDetailResponseList.add(roomDetailResponse);
+
+        }
+        return roomDetailResponseList;
+    }
+
+    public List<Hotel> getAllHotels() {
+        return hotelRepository.findAll();
+    }
+
+    public List<Hotel> searchHotels(String type, String region, String hotelName) {
+        return hotelRepository.searchHotels(type, region, hotelName);
     }
 }

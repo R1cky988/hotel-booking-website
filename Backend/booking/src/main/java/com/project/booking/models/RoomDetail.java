@@ -43,11 +43,22 @@ public class RoomDetail {
     @Column(name = "price_per_night")
     private Long pricePerNight;
 
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "size")
+    private Long size;
+
     @ManyToOne
     @JoinColumn(name = "hotel_id")
+    @JsonBackReference
     private Hotel hotel;
 
     @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JsonManagedReference
     private List<RoomFacilities> facilities;
+
+    @OneToMany(mappedBy = "roomDetail", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JsonManagedReference
+    private List<RoomImage> roomImages;
 }

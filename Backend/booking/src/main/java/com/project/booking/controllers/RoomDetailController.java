@@ -4,8 +4,7 @@ import com.project.booking.dtos.HotelDTO;
 import com.project.booking.dtos.RoomDetailDTO;
 import com.project.booking.models.*;
 import com.project.booking.repositories.RoomDetailRepository;
-import com.project.booking.response.ListRoomDetailResponse;
-import com.project.booking.response.RoomDetailResponse;
+import com.project.booking.services.HotelService;
 import com.project.booking.services.RoomDetailService;
 import com.project.booking.services.RoomImageService;
 import jakarta.validation.Valid;
@@ -15,6 +14,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -31,13 +32,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("/room")
 public class RoomDetailController {
     private final RoomDetailService roomDetailService;
     private final RoomDetailRepository roomDetailRepository;
     private final RoomImageService roomImageService;
+    private final HotelService hotelService;
 
     @PostMapping("/upload")
     public ResponseEntity<?> uploadRoom(
@@ -56,15 +58,19 @@ public class RoomDetailController {
         }
     }
 
-    @GetMapping("/hotel/{hotelId}")
-    public ResponseEntity<?> getAllRooms(
-            @PathVariable("hotelId") Long hotelId
+    @GetMapping("")
+    public String getAllRooms(
+            @RequestParam("hotelId") Long hotelId,
+            @RequestParam("roomId") Long roomId,
+            Model model
     ) {
         try {
-            ListRoomDetailResponse roomDetailResponseList = roomDetailService.getAllRoomOfPlace(hotelId);
-            return ResponseEntity.ok(roomDetailResponseList);
+            RoomDetail roomDetail = roomDetailService.getRoomById(roomId);
+            model.addAttribute("roomDetail", roomDetail);
+            return "RoomDetail";
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            model.addAttribute("error", e.getMessage());
+            return "RoomDetail";
         }
     }
 
@@ -149,7 +155,7 @@ public class RoomDetailController {
     @GetMapping("/image/{name}")
     public ResponseEntity<?> viewPicture(@PathVariable String name) {
         try {
-            java.nio.file.Path picturePath = Paths.get("uploads/" + name);
+            java.nio.file.Path picturePath = Paths.get("D:/Documents/DEV/Project1/Backup/Backend/uploads/"+ name);
             UrlResource resource = new UrlResource(picturePath.toUri());
 
             String contentType = URLConnection.guessContentTypeFromName(picturePath.toString());
@@ -165,4 +171,5 @@ public class RoomDetailController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }

@@ -18,10 +18,18 @@ public interface RoomDetailRepository extends JpaRepository<RoomDetail, Long> {
 
     @Query("SELECT rd FROM RoomDetail rd WHERE rd.hotel.id = :hotelId " +
             "AND rd.available > 0 " +
-            "AND (rd.checkOut <= :checkInDate OR rd.checkIn >= :checkOutDate)")
+            "AND NOT (rd.checkIn >= :checkOutDate OR rd.checkOut <= :checkInDate)")
+
     List<RoomDetail> findAvailableRooms(
             @Param("hotelId") Long hotelId,
             @Param("checkInDate") Date checkInDate,
             @Param("checkOutDate") Date checkOutDate
     );
+
+    @Query("SELECT rd.roomName FROM RoomDetail rd WHERE rd.hotel.id = :hotelId")
+    List<String> findRoomNamesByHotelId(@Param("hotelId") Long hotelId);
+
+    @Query("SELECT rd FROM RoomDetail rd WHERE rd.hotel.id = :hotelId")
+    List<RoomDetail> findRoomByHotelId(@Param("hotelId") Long hotelId);
+
 }

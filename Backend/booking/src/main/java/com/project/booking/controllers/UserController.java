@@ -30,6 +30,27 @@ public class UserController {
         return "Login"; //(Login.html)
     }
 
+    @PostMapping("/login")
+    public String login(
+            @Valid @ModelAttribute UserLoginDTO userLoginDTO,
+            BindingResult result,
+            HttpSession httpSession,
+            Model model
+    ){
+        try{
+            if(result.hasErrors()){
+                model.addAttribute("errors", result.getFieldErrors());
+                return "Login";
+            }
+            Users existingUser = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+            httpSession.setAttribute("user", existingUser);
+            return "redirect:/index";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "Login";
+        }
+    }
+
     @GetMapping("/register")
     public String registerPage(Model model){
         model.addAttribute("usersDTO", new UsersDTO());
@@ -57,28 +78,6 @@ public class UserController {
         }
     }
 
-//    @PutMapping("/update_password/{id}")
-//    public ResponseEntity<?> updateUser(
-//            @Valid @PathVariable("id") Long userId,
-//            @RequestBody UsersDTO usersDTO,
-//            BindingResult result
-//    ){
-//        try{
-//            if(result.hasErrors()){
-//                List<String> errorMessages = result.getFieldErrors()
-//                        .stream()
-//                        .map(FieldError::getDefaultMessage)
-//                        .toList();
-//                return ResponseEntity.badRequest().body(errorMessages);
-//            }
-//
-//            userService.updateUserPassword(userId, usersDTO);
-//            return ResponseEntity.ok("Password Updated");
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-
     @GetMapping("/{id}")
     public String getUser(
             @Valid @PathVariable("id") long userId,
@@ -94,26 +93,7 @@ public class UserController {
         }
     }
 
-    @PostMapping("/login")
-    public String login(
-            @Valid @ModelAttribute UserLoginDTO userLoginDTO,
-            BindingResult result,
-            HttpSession httpSession,
-            Model model
-    ){
-        try{
-            if(result.hasErrors()){
-                model.addAttribute("errors", result.getFieldErrors());
-                return "Login";
-            }
-            Users existingUser = userService.login(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-            httpSession.setAttribute("user", existingUser);
-            return "redirect:/";
-        } catch (Exception e) {
-            model.addAttribute("error", e.getMessage());
-            return "Login";
-        }
-    }
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session){

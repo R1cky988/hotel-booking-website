@@ -1,6 +1,7 @@
 package com.project.booking.response;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.booking.models.Address;
 import com.project.booking.models.FeedbackDetail;
 import com.project.booking.models.FeedbackSummary;
 import com.project.booking.models.RoomDetail;
@@ -17,14 +18,16 @@ import java.util.List;
 @NoArgsConstructor
 public class FeedbackSummaryResponse {
 
-    private Long id;
-
-
-    private Long roomId;
-
+    public Long id;
+    private Long hotelId;
+    private String hotelName;
+    private String hotelImage;
+    private String region;
+    private String country;
 
     private double rating;
-
+    private Long stars;
+    private Long reviews;
     private List<FeedbackDetailResponse> feedbackDetails;
 
     public static FeedbackSummaryResponse fromSummary(FeedbackSummary feedbackSummary){
@@ -35,14 +38,20 @@ public class FeedbackSummaryResponse {
 
         List<FeedbackDetailResponse> feedbackDetailResponses = feedbackDetail.stream().map(FeedbackDetailResponse::fromDetail)
                 .toList();
+        Address address = feedbackSummary.getHotel().getAddress();
 
-        FeedbackSummaryResponse feedbackSummaryResponse = FeedbackSummaryResponse.builder()
+        return FeedbackSummaryResponse.builder()
                 .id(feedbackSummary.getId())
-                .roomId(feedbackSummary.getHotel().getId())
-                .rating(averageRating)
+                .hotelId(feedbackSummary.getHotel().getId())
+                .hotelName(feedbackSummary.getHotel().getName())
+                .hotelImage(feedbackSummary.getHotel().getImage())
+                .region(address.getRegion()) // Lấy region từ Address
+                .country(address.getCountry())
+                .rating(2*averageRating)
+//                .reviews(feedbackSummary.getHotel().getReviews())
+                .reviews((long) feedbackDetail.size())
+                .stars(feedbackSummary.getHotel().getStars())
                 .feedbackDetails(feedbackDetailResponses)
                 .build();
-
-        return feedbackSummaryResponse;
     }
 }

@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -29,9 +30,11 @@ public class FeedbackDetail {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private RoomDetail room;
+    @Column(name = "room_name")
+    private String roomName;
+
+    @Column(name = "hotel_id")
+    private String hotelid;
 
     @OneToOne
     @JoinColumn(name = "user_id")
@@ -43,10 +46,13 @@ public class FeedbackDetail {
     @Column(name = "rate")
     private int rate;
 
+    private String email;
+
     @Column(name = "create_time")
     private LocalDate createTime;
     @PrePersist
     protected void onCreate(){
         createTime = LocalDate.now();
     }
+
 }

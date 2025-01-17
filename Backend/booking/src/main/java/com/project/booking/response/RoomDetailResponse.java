@@ -6,8 +6,10 @@ import com.project.booking.models.RoomDetail;
 import com.project.booking.models.RoomFacilities;
 import lombok.*;
 
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -16,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class RoomDetailResponse {
     private Long id;
+
+    private String roomName;
 
     private Long available;
 
@@ -36,10 +40,12 @@ public class RoomDetailResponse {
     private Long hotelId;
 
     @JsonProperty("price_per_night")
-    private Long pricePerNight;
+    private String pricePerNight;
 
     @JsonProperty("facilities")
     private List<RoomFacilities> facility;
+
+    static NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
     public static RoomDetailResponse fromRoomDetail(RoomDetail roomDetail){
         RoomDetailResponse roomDetailResponse = RoomDetailResponse.builder()
@@ -51,8 +57,9 @@ public class RoomDetailResponse {
                 .checkIn(roomDetail.getCheckIn())
                 .checkOut(roomDetail.getCheckOut())
                 .hotelId(roomDetail.getHotel().getId())
-                .pricePerNight(roomDetail.getPricePerNight())
+                .pricePerNight(formatter.format(roomDetail.getPricePerNight()))
                 .facility(roomDetail.getFacilities())
+                .roomName(roomDetail.getRoomName())
                 .build();
         return roomDetailResponse;
     }
