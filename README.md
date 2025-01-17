@@ -43,17 +43,17 @@ Dự án này là một hệ thống đặt phòng khách sạn trực tuyến �
     https://github.com/R1cky988/hotel-booking-website.git
     ```
 2. Backend
-### Cài đặt XAMPP
-### Mở XAMPP mục Apache và MySQL (MySQL ở cổng 3306)
-### Trong XAMPP, mục MySQL nhấn admin để vào phpMyAdmin
-### tạo database
-### Trong Intelliji IDEA, mở dự án ..\booking-website\Backend
-### Chạy dự án
+- Cài đặt XAMPP
+- Mở XAMPP mục Apache và MySQL (MySQL ở cổng 3306)
+- Trong XAMPP, mục MySQL nhấn admin để vào phpMyAdmin
+- tạo database
+- Trong Intelliji IDEA, mở dự án ..\booking-website\Backend
+- Chạy dự án
 3. Frontend
-### Template của frontend đã để ở trong thư mục ..\booking-website\Backend\booking\src\main\resources\templates
-### Những file Js và CSS được để trong thư mục ..\booking-website\Backend\booking\src\main\resources\static
+- Template của frontend đã để ở trong thư mục ..\booking-website\Backend\booking\src\main\resources\templates
+- Những file Js và CSS được để trong thư mục ..\booking-website\Backend\booking\src\main\resources\static
 4. Truy cập ứng dung
-### Backend và frontend sẽ chạy trên `http://localhost:8088`
+- Backend và frontend sẽ chạy trên `http://localhost:8088`
 
 
 
