@@ -1,13 +1,16 @@
 server:
   port: 8088
 spring:
+  security:
+    headers:
+      frameOptions: DISABLE
   thymeleaf:
     enabled: true
     prefix: classpath:/templates/
     suffix: .html
     cache: false
   datasource:
-    url: jdbc:mysql://localhost:3306/booking?useSSL=false&serverTimezone=UTC%2B7
+    url: jdbc:mysql://localhost:3306/roombooking?useSSL=false&serverTimezone=UTC%2B7
     driver-class-name: com.mysql.cj.jdbc.Driver  #driver class name cua mysql, tryen thong tu lau roi
     username: root  #username va password cua mysql do minh tu
     password:

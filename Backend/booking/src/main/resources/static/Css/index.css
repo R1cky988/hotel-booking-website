@@ -46,6 +46,9 @@
  .navbar-nav .nav-link:hover {
    color: #232323;
  }
+ .slick-slide{
+    height:auto;
+ }
  .navbar {
    background-color: rgb(28, 87, 136); /*Màu xám nhạt*/
    /* opacity: 0.9; */
@@ -98,7 +101,7 @@
  .search-bar {
    margin-top: 70px;
    display: flex;
-   padding: 10px;
+   padding: 10px 10px 0 10px;
    width: 90%;
    background-color: #fff;
    border-radius: 5px; /* Bo góc */
@@ -206,11 +209,11 @@
    text-align: center;
  }
  .card-text {
-   font-size: 12px;
+   font-size: 14px;
    text-align: center;
  }
  .d-flex {
-   font-size: 12px;
+   font-size: 13px;
    display: flex;
    justify-content: center;
  }
@@ -317,11 +320,30 @@
  .review-card p {
    font-size: 14px;
    color: #777;
+    display: -webkit-box;
+       -webkit-box-orient: vertical;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       -webkit-line-clamp: 5; /* Giới hạn hiển thị 9 dòng */
  }
  .review-card .stars {
    color: #ffc107;
-   margin: 10px 0;
+   margin: 5px 0;
  }
+ .review-card .stars1 {
+    color: #a0a0a0;
+    margin: 5px 0;
+
+  }
+  .blog_room .stars {
+     color: #ffc107;
+     margin: 5px 0;
+   }
+   .blog_room .stars1 {
+      color: #a0a0a0;
+      margin: 5px 0;
+
+    }
  .review-card.active {
    border: 2px solid #007bff;
  }
@@ -349,16 +371,6 @@
    font-size: 14px;
    color: #6c757d;
  }
-
- .user-info {
-   display: flex;
-   align-items: center;
- }
-
- .user-info .nav-item {
-   margin-left: 6px; /* Adds space between the first name and sign-out button */
- }
-
  .footer .left,
  .footer .right {
    display: inline-block;
@@ -375,4 +387,7 @@
  .footer .right h5 {
    color: rgb(28, 87, 136);
    font-weight: bold;
+ }
+ .slick-dots li button:before {
+     content: ""; /* Xóa dấu chấm */
  }

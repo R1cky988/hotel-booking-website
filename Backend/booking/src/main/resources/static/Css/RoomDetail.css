@@ -1,5 +1,4 @@
 .room-image {
-    max-height: 400px;
     overflow: hidden;
     border-radius: 10px;
   }
@@ -37,4 +36,25 @@
   }
   .thumbnail-container::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera */
+  }
+   .carousel-item img {
+    width: 100%;            /* Đảm bảo ảnh chiếm toàn bộ chiều rộng */
+    max-height: 400px;      /* Giới hạn chiều cao để ảnh không bị quá lớn */
+    object-fit: contain;    /* Giữ nguyên tỷ lệ ảnh mà không bị cắt bớt */
+  }
+  .carousel-control-prev-icon {
+    padding:13px;
+    background-color: #b5b5b5;  /* Màu xanh dương cho mũi tên sau */
+    border-radius: 30%;    /* Bo tròn hình tròn của mũi tên */
+  }
+
+  /* Thay đổi màu mũi tên sau */
+  .carousel-control-next-icon {
+    padding:13px;
+    background-color: #b5b5b5;  /* Màu xanh dương cho mũi tên sau */
+    border-radius: 30%;
+            /* Bo tròn hình tròn của mũi tên */
+  }
+  .slick-slide{
+    height:auto
   }

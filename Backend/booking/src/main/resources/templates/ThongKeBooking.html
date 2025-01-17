@@ -1,275 +1,261 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đặt phòng</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link href="../Css/House.css" rel="stylesheet" />
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-        height: 100vh; /* Chiều cao toàn bộ màn hình */
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt phòng</title>
+  <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous"
+  />
+  <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+  />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+          rel="stylesheet"
+  />
+  <link href="../Css/House.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: "Roboto", sans-serif;
+      height: 100vh; /* Chiều cao toàn bộ màn hình */
 
-        margin: 0; /* Xóa margin mặc định */
-        background-color: #f0f2f5; /* Màu nền nhẹ nhàng */
-      }
-      /* form booking */
-      .booking-form {
-        background: #ffffff; /* Màu nền trắng cho form */
-        padding: 30px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      }
-      .form-control:focus {
-        box-shadow: none;
-        border-color: #007bff;
-      }
-      .text-center {
-        display: flex;
-        align-content: center;
-        justify-content: center;
-      }
-      .btn-primary {
-        background-color: #0056b3;
-        border-color: #0056b3;
-      }
-      .btn-primary:hover {
-        background-color: #0d65c2;
-        border-color: #0d65c2;
-      }
-      .note {
-        color: red;
-      }
-      .booking-form label,
-      h4 {
-        color: #18528f;
-      }
-      .booking-form h4 {
-        text-align: center;
-        font-weight: 700;
-        margin-top: 15px;
-        margin-bottom: 20px;
-      }
-      .table {
-        margin-bottom: 20px; /* Khoảng cách giữa các bảng */
-      }
-      .table-bordered thead th {
-        color: #151515;
-        text-align: left;
-      }
-      .table-bordered thead td {
-        color: #151515;
-      }
-    </style>
-  </head>
-  <body>
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-    <div class="container-fluid" style="max-height: 30px">
-      <a class="navbar-brand" href=""> TravelBooking </a>
-      <button
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              class="navbar-toggler"
-              data-bs-target="#navbarNav"
-              data-bs-toggle="collapse"
-              type="button"
-      >
-        <span class="navbar-toggler-icon"> </span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">
-              <i class="fas fa-search"> </i> ICON TÌM KIẾM
+      margin: 0; /* Xóa margin mặc định */
+      background-color: #f0f2f5; /* Màu nền nhẹ nhàng */
+    }
+    /* form booking */
+    .booking-form {
+      background: #ffffff; /* Màu nền trắng cho form */
+      margin: 70px 0px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      width: 1000px;
+      transform: translate(-13%, 0%);
+    }
+    .form-control:focus {
+      box-shadow: none;
+      border-color: #004c9c;
+    }
+    .table button {
+      color: #f9f9f9;
+    }
+    .table button:hover {
+      text-decoration: none;
+    }
+    .note {
+      color: red;
+    }
+    .booking-form label,
+    h4 {
+      color: #18528f;
+    }
+    .booking-form h4 {
+      text-align: center;
+      font-weight: 700;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+    .table {
+      margin-bottom: 20px; /* Khoảng cách giữa các bảng */
+      vertical-align: middle;
+      text-align: center;
+    }
+    .table-bordered thead th {
+      color: #151515;
+    }
+    .table-bordered thead td {
+      color: #151515;
+    }
+  </style>
+</head>
+<body>
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top">
+  <div class="container-fluid" style="max-height: 30px">
+    <a class="navbar-brand" th:href="@{/index}"> TravelBooking </a>
+    <button
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-bs-target="#navbarNav"
+            data-bs-toggle="collapse"
+            type="button"
+    >
+      <span class="navbar-toggler-icon"> </span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="#">
+            <i class="fas fa-search"> </i> ICON TÌM KIẾM
+          </a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/index}"> HOME </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{index#popular}"> POPULAR </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{index#explore}"> EXPLORE </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{index#review}"> REVIEW </a>
+        </li>
+        <div class="vertical-line1"></div>
+
+        <div th:if="${session.user != null}" class="user-info d-flex">
+
+          <a class="nav-link" style="color: #fff; text-decoration: none;"
+             th:href="@{http://localhost:8088/booking/{userId}(userId=${session.user.id})}"
+          >
+            <span th:text="${session.user.firstName}"></span>
+            <span th:text="${session.user.lastName}"></span>
+          </a>
+
+          <li class="nav-item">
+            <a
+                    class="nav-link"
+                    href="/users/logout"
+                    style="color: #ffffff"
+                    onmouseover="this.style.color='433e3e'"
+                    onmouseout="this.style.color='#ff3b3f'"
+            >
+              SIGN OUT
             </a>
-          </li> -->
-          <li class="nav-item">
-            <a class="nav-link" href="#"> HOME </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#popular"> POPULAR </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#explore"> EXPLORE </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#review"> REVIEW </a>
-          </li>
-          <div class="vertical-line1"></div>
-
-          <div th:if="${session.user != null}" class="user-info d-flex">
-
-            <a class="nav-link" style="color: #fff; text-decoration: none;">
-              <span th:text="${session.user.firstName}"></span>
-              <span th:text ="${session.user.lastName}"></span>
-            </a>
-
-            <li class="nav-item">
-              <a
-                      class="nav-link"
-                      href="/users/logout"
-                      style="color: #ffffff"
-                      onmouseover="this.style.color='433e3e'"
-                      onmouseout="this.style.color='#ff3b3f'"
-              >
-                SIGN OUT
-              </a>
-            </li>
-          </div>
-
-          <div th:if="${session.user == null}" class="login-form d-flex">
-            <li class="nav-item">
-              <a
-                      class="nav-link"
-                      href="/users/login"
-                      style="color: #f9f9f9"
-                      onmouseover="this.style.color='433e3e'"
-                      onmouseout="this.style.color='#ff3b3f'"
-              >
-                SIGN IN
-              </a>
-            </li>
-            <li class="nav-item">
-              <a
-                      class="nav-link"
-                      href="/users/register"
-                      style="color: #ffffff"
-                      onmouseover="this.style.color='433e3e'"
-                      onmouseout="this.style.color='#ff3b3f'"
-              >
-                SIGN UP
-              </a>
-            </li>
-          </div>
-        </ul>
-      </div>
-    </div>
-  </nav>
-    <!-- form -->
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="booking-form">
-            <form th:action="@{booking/{formId}(formId=${bookingResponse.id})}" method="get" th:object="${bookingResponse}">
-              <div th:if="${error}" class="alert alert-danger">
-                <p th:text="${error}"></p>
-              </div>
-              <h4>Thông tin người đặt phòng</h4>
-              <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <td><b>Họ và tên:</b></td>
-                    <td><input
-                            type="text"
-                            th:field="*{name}"
-                            class="form-control"
-                            readonly
-                    />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>Địa chỉ email:</b></td>
-                    <td><input
-                            type="email"
-                            th:field="*{email}"
-                            class="form-control"
-                            readonly
-                    />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>Số điện thoại:</b></td>
-                    <td><input
-                            type="tel"
-                            th:field="*{phone}"
-                            class="form-control"
-                            readonly
-                    />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>Ngày nhận phòng:</b></td>
-                    <td><input
-                            type="date"
-                            th:field="*{checkIn}"
-                            class="form-control"
-                            readonly
-                    />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><b>Ngày trả phòng:</b></td>
-                    <td><input
-                            type="date"
-                            th:field="*{checkOut}"
-                            class="form-control"
-                            readonly
-                    /></td>
-                  </tr>
-                  <tr>
-                    <td><b>Các yêu cầu đặc biệt:</b></td>
-                    <td><input
-                            type="text"
-                            th:field="*{specialRequest}"
-                            class="form-control"
-                            readonly
-                    /></td>
-                  </tr>
-                </tbody>
-              </table>
-              <h4>Thông tin phòng</h4>
-              <table class="table table-bordered">
-                <thead>
-                  <tr>
-                    <th>Loại phòng</th>
-                    <th>Số lượng</th>
-                    <th>Giá</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Phòng gia đình</td>
-                    <td>2</td>
-                    <td>1.000.000</td>
-                  </tr>
-                  <tr>
-                    <td>Phòng deluxe giường đôi</td>
-                    <td>2</td>
-                    <td>1.000.000</td>
-                  </tr>
-                  <tr>
-                    <td><b>Tổng thanh toán</b></td>
-                    <td></td>
-                    <td><b>2.000.000</b></td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary w-50">
-                  <b>Hủy đặt phòng</b>
-                </button>
-              </div>
-            </form>
-          </div>
         </div>
+
+        <div th:if="${session.user == null}" class="login-form d-flex">
+          <li class="nav-item">
+            <a
+                    class="nav-link"
+                    href="/users/login"
+                    style="color: #f9f9f9"
+                    onmouseover="this.style.color='433e3e'"
+                    onmouseout="this.style.color='#ff3b3f'"
+            >
+              SIGN IN
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+                    class="nav-link"
+                    href="/users/register"
+                    style="color: #ffffff"
+                    onmouseover="this.style.color='433e3e'"
+                    onmouseout="this.style.color='#ff3b3f'"
+            >
+              SIGN UP
+            </a>
+          </li>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<!-- form -->
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="booking-form">
+        <form th:action="@{/booking/{userId}(userId=${users.id})}" method="get" th:object="${users}">
+          <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+          </div>
+          <h4>Thông tin người đặt phòng</h4>
+          <table class="table table-bordered">
+            <tbody>
+            <tr>
+              <td><b>Họ và tên:</b></td>
+              <td><input
+                      type="text"
+                      th:value="${users.firstName + ' ' + users.lastName}"
+                      class="form-control"
+                      readonly
+              />
+              </td>
+            </tr>
+            <tr>
+              <td><b>Địa chỉ email:</b></td>
+              <td><input
+                      type="email"
+                      th:field="*{email}"
+                      class="form-control"
+                      readonly
+              />
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+          <h4>Thông tin phòng</h4>
+          <table class="table table-bordered">
+            <thead>
+            <tr>
+              <th>Loại phòng</th>
+              <th>Số lượng</th>
+              <th>Ngày nhận phòng</th>
+              <th>Ngày trả phòng</th>
+              <th>Thành tiền</th>
+              <th>Số điện thoại người đặt</th>
+              <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookingResponse}">
+              <td th:text="${booking.roomName}"></td>
+              <td th:text="${booking.totalRoom}"></td>
+              <td th:text="${booking.checkIn}"></td>
+              <td th:text="${booking.checkOut}"></td>
+              <td th:text="${booking.totalPrice}"></td>
+              <td th:text="${booking.phone}"></td>
+              <td>
+                <button type="button"
+                        class="btn btn-primary"
+                        th:onclick="|deleteBooking(${booking.id})|">
+                  <b>Hủy</b>
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <div class="text-center"></div>
+        </form>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function deleteBooking(formId) {
+    if (confirm("Bạn có chắc chắn muốn hủy đặt phòng này?")) {
+      fetch(`/booking/${formId}`, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.message) {
+          alert(data.message);
+          window.location.href = "/";
+        } else {
+          alert("Xóa thất bại!");
+        }
+      })
+      .catch(error => {
+        console.error("Error deleting booking:", error);
+        alert("Có lỗi xảy ra, vui lòng thử lại!");
+      });
+    }
+  }
+</script>
+</body>
 </html>
