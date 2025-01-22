@@ -11,7 +11,7 @@ Dự án này là một hệ thống đặt phòng khách sạn trực tuyến �
 
 ## Người đóng góp
 - **Nguyễn Kiến Quốc** - Chức năng hiển thị thông tin khách sạn, hiển thị đánh giá, tìm kiếm
-- **Hà Ngọc Huy** - Chức năng ặt phòng, ánh giá khách sạn
+- **Hà Ngọc Huy** - Chức năng đặt phòng, đánh giá khách sạn
 
 ## Thiết kế
 - **Frontend**: Thymeleaf và Bootstrap để tạo giao diện người dùng thân thiện
